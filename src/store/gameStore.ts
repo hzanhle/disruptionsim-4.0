@@ -68,10 +68,10 @@ function resolveUiGameStatus(state: PersistedGameState): PersistedGameState['gam
 
 const validatedStorage: StateStorage = {
   getItem: (name) => {
-    const raw = localStorage.getItem(name)
-    if (!raw) return null
-
     try {
+      const raw = localStorage.getItem(name)
+      if (!raw) return null
+
       const parsed = JSON.parse(raw) as { state?: unknown; version?: number }
       const validated = validatePersistedState(parsed.state)
       if (validated.corrupted || !validated.state) {
@@ -87,15 +87,25 @@ const validatedStorage: StateStorage = {
 
       return JSON.stringify({ state: restored, version: parsed.version ?? 0 })
     } catch {
-      pendingSaveNotice = 'Không thể đọc dữ liệu lưu. Trò chơi sẽ bắt đầu lại.'
+      pendingSaveNotice =
+        pendingSaveNotice ??
+        'Không thể đọc dữ liệu lưu. Trò chơi sẽ bắt đầu lại.'
       return null
     }
   },
   setItem: (name, value) => {
-    localStorage.setItem(name, value)
+    try {
+      localStorage.setItem(name, value)
+    } catch {
+      // Ignore quota / privacy restrictions — gameplay can continue in-memory.
+    }
   },
   removeItem: (name) => {
-    localStorage.removeItem(name)
+    try {
+      localStorage.removeItem(name)
+    } catch {
+      // Ignore storage access failures.
+    }
   },
 }
 
@@ -298,7 +308,13 @@ export const useGameStore = create<GameStore>()(
         ending: state.ending,
         soundEnabled: state.soundEnabled,
       }),
-      onRehydrateStorage: () => () => {
+      onRehydrateStorage: () => (_state, error) => {
+        if (error) {
+          pendingSaveNotice =
+            pendingSaveNotice ??
+            'Không thể khôi phục tiến trình. Trò chơi sẽ bắt đầu lại.'
+        }
+
         useGameStore.setState({
           hasHydrated: true,
           saveNotice: pendingSaveNotice,
