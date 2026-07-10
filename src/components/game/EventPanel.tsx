@@ -10,9 +10,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChoiceCards } from '@/components/game/ChoiceCards'
+import { AssetImage } from '@/components/shared/AssetImage'
 import { getMonthEvent, isAutomaticEvent, isChoiceEvent, isFinaleEvent } from '@/data/monthEvents'
+import { eventSceneUrl, monthCharacterUrl } from '@/lib/gameAssets'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -39,6 +41,9 @@ export function EventPanel({ month }: EventPanelProps) {
       ? event.choices.find((choice) => choice.id === pendingChoiceId)
       : null
 
+  const scene = eventSceneUrl(month)
+  const character = monthCharacterUrl(month)
+
   const handleConfirm = () => {
     playSound('confirm')
     confirmChoice()
@@ -56,13 +61,26 @@ export function EventPanel({ month }: EventPanelProps) {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-4"
     >
-      <Card>
+      <Card className="overflow-hidden">
+        <AssetImage
+          src={scene}
+          alt={`Bối cảnh tháng ${month}: ${event.title}`}
+          className="aspect-[16/9] border-b border-slate-800"
+        />
         <CardHeader>
-          <CardTitle>{event.title}</CardTitle>
+          <div className="flex items-start gap-3">
+            <AssetImage
+              src={character}
+              alt=""
+              className="hidden h-14 w-11 shrink-0 rounded-lg border border-slate-700 sm:block"
+              imgClassName="object-cover object-top"
+            />
+            <div className="min-w-0 space-y-1">
+              <CardTitle>{event.title}</CardTitle>
+              <p className="text-sm leading-relaxed text-slate-300">{event.context}</p>
+            </div>
+          </div>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm leading-relaxed text-slate-300">{event.context}</p>
-        </CardContent>
       </Card>
 
       {isChoiceEvent(event) ? (

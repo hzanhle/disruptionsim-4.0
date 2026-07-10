@@ -1,6 +1,8 @@
 import { Activity, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AssetImage } from '@/components/shared/AssetImage'
 import { calculateDelta } from '@/lib/gameCalculations'
+import { factoryVisualUrl } from '@/lib/gameAssets'
 
 interface FactoryStatusProps {
   budget: number
@@ -10,6 +12,7 @@ interface FactoryStatusProps {
 
 export function FactoryStatusPanel({ budget, llsx, qhsx }: FactoryStatusProps) {
   const delta = calculateDelta(llsx, qhsx)
+  const visual = factoryVisualUrl({ budget, llsx, qhsx, delta })
 
   const status =
     delta >= 3
@@ -39,7 +42,12 @@ export function FactoryStatusPanel({ budget, llsx, qhsx }: FactoryStatusProps) {
   const StatusIcon = status.icon
 
   return (
-    <Card>
+    <Card className="overflow-hidden">
+      <AssetImage
+        src={visual}
+        alt={`Trạng thái nhà máy: ${status.label}`}
+        className="aspect-[16/9] border-b border-slate-800"
+      />
       <CardHeader className="pb-2">
         <div className="flex items-center gap-2">
           <Activity className="h-5 w-5 text-cyan-400" />

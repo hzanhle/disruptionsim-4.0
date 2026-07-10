@@ -1,43 +1,52 @@
 import { ArrowLeft, BookOpenCheck, Scale, Wallet, Wrench, Trophy } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AssetImage } from '@/components/shared/AssetImage'
+import { concepts, assetUrl } from '@/lib/gameAssets'
 import { useGameStore } from '@/store/gameStore'
 
 const glossary = [
   {
     title: 'Ngân sách',
     icon: Wallet,
+    image: () => concepts.budget(),
     body: 'Nguồn tài chính của nhà máy. Nếu ngân sách ≤ $0 sau bất kỳ sự kiện hoặc quyết toán tháng nào, bạn thua vì thất bại kinh tế.',
   },
   {
     title: 'Trình độ LLSX',
     icon: Wrench,
+    image: () => concepts.llsx(),
     body: 'Lực lượng sản xuất — công nghệ và công cụ lao động: máy cắt laser, robot AI, IoT, tự động hóa, nền tảng dữ liệu.',
   },
   {
     title: 'Trình độ QHSX',
     icon: BookOpenCheck,
+    image: () => concepts.qhsx(),
     body: 'Quan hệ sản xuất — trình độ người lao động, kỹ năng vận hành, quy trình quản lý, lương thưởng, phúc lợi, văn hóa nhà máy.',
   },
   {
     title: 'Chênh lệch (LLSX − QHSX)',
     icon: Scale,
+    image: () => concepts.balance(),
     body: 'Chênh lệch = LLSX − QHSX. Khi chênh lệch = 2 sẽ phát sinh phạt mất cân bằng $15/tháng. Khi chênh lệch ≥ 3 kích hoạt kết cục Đứt gãy công nghệ ngay lập tức.',
   },
   {
     title: 'Quyết toán hàng tháng',
     icon: Wallet,
+    image: () => concepts.settlement(),
     body: 'Doanh thu = LLSX × $25. Chi phí vận hành = QHSX × $10. Cộng/trừ các điều chỉnh sự kiện và phạt mất cân bằng để ra thay đổi ròng.',
   },
   {
     title: 'Chiến thắng',
     icon: Trophy,
+    image: () => concepts.endingsOverview(),
     body: 'Sau tháng 10: ngân sách > 0, LLSX ≥ 4, QHSX ≥ 4, delta < 3 để đạt CNH-HĐH bền vững.',
   },
 ]
 
 export function TutorialScreen() {
   const returnFromTutorial = useGameStore((state) => state.returnFromTutorial)
+  const endingsOverview = concepts.endingsOverview()
 
   return (
     <div className="min-h-screen bg-slate-950 px-4 py-8 text-slate-100 sm:px-6">
@@ -57,7 +66,12 @@ export function TutorialScreen() {
 
         <div className="grid gap-4 md:grid-cols-2">
           {glossary.map((item) => (
-            <Card key={item.title}>
+            <Card key={item.title} className="overflow-hidden">
+              <AssetImage
+                src={item.image()}
+                alt={item.title}
+                className="aspect-[16/10] border-b border-slate-800"
+              />
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2">
                   <item.icon className="h-5 w-5 text-cyan-400" />
@@ -71,7 +85,12 @@ export function TutorialScreen() {
           ))}
         </div>
 
-        <Card className="border-amber-500/30 bg-amber-950/10">
+        <Card className="overflow-hidden border-amber-500/30 bg-amber-950/10">
+          <AssetImage
+            src={endingsOverview ?? assetUrl('concepts/endings-overview.png')}
+            alt="Ba kết cục có thể xảy ra"
+            className="aspect-[16/9] border-b border-amber-500/20"
+          />
           <CardHeader>
             <CardTitle className="text-base">Ba kết cục có thể xảy ra</CardTitle>
           </CardHeader>

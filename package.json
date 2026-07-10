@@ -10,7 +10,9 @@
     "typecheck": "tsc -b --noEmit",
     "lint": "oxlint src",
     "test": "vitest run",
-    "generate:sounds": "node scripts/generate-sounds.mjs"
+    "generate:sounds": "node scripts/generate-sounds.mjs",
+    "generate:assets": "node generate-assets.js",
+    "extract:prompts": "node scripts/extract-prompts.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.19",

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { SoundToggle } from '@/components/shared/SoundToggle'
 import { Progress } from '@/components/ui/progress'
 import { TOTAL_MONTHS } from '@/lib/constants'
+import { branding } from '@/lib/gameAssets'
 
 interface GameHeaderProps {
   currentMonth: number
@@ -16,15 +17,25 @@ export function GameHeader({
   onReset,
 }: GameHeaderProps) {
   const progress = Math.min(100, ((currentMonth - 1) / TOTAL_MONTHS) * 100)
+  const logo = branding.logo()
 
   return (
     <header className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-400">
-            SmartGarment Việt Nam
-          </p>
-          <h1 className="text-2xl font-bold sm:text-3xl">DISRUPTIONSIM 4.0</h1>
+        <div className="flex items-center gap-3">
+          {logo ? (
+            <img
+              src={logo}
+              alt=""
+              className="h-11 w-11 rounded-xl border border-slate-700 object-cover"
+            />
+          ) : null}
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-400">
+              SmartGarment Việt Nam
+            </p>
+            <h1 className="text-2xl font-bold sm:text-3xl">DISRUPTIONSIM 4.0</h1>
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="sm" onClick={onOpenTutorial}>

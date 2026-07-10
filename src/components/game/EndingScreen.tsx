@@ -2,7 +2,9 @@ import { motion } from 'framer-motion'
 import { RotateCcw, ScrollText, Trophy, XCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AssetImage } from '@/components/shared/AssetImage'
 import { calculateDelta } from '@/lib/gameCalculations'
+import { endingImageUrl } from '@/lib/gameAssets'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -46,6 +48,7 @@ export function EndingScreen() {
   const meta = endingMeta[ending.type]
   const Icon = meta.icon
   const delta = calculateDelta(llsx, qhsx)
+  const hero = endingImageUrl(ending.type)
 
   const handleReplay = () => {
     playSound('click')
@@ -64,7 +67,12 @@ export function EndingScreen() {
         animate={{ opacity: 1, scale: 1 }}
         className="mx-auto max-w-3xl space-y-6"
       >
-        <Card className={meta.tone}>
+        <Card className={`overflow-hidden ${meta.tone}`}>
+          <AssetImage
+            src={hero}
+            alt={meta.title}
+            className="aspect-[16/9] border-b border-white/10"
+          />
           <CardHeader>
             <div className="flex items-center gap-3">
               <Icon className="h-8 w-8" />

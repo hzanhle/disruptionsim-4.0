@@ -1,0 +1,327 @@
+[
+  {
+    "Path": "branding/logo-disruptionsim.png",
+    "Ratio": "1:1",
+    "Prompt": "Game logo mark for \"DISRUPTIONSIM 4.0\", abstract smart garment factory symbol combined with digital circuit lines and industry 4.0 nodes, semi-flat vector logo design, cyan and violet gradient on dark slate background, centered composition, iconic and minimal, no text letters, symbol only, crisp edges, app icon quality"
+  },
+  {
+    "Path": "branding/logo-smartgarment.png",
+    "Ratio": "16:9",
+    "Prompt": "Corporate logo emblem for a Vietnamese export garment company \"SmartGarment\", stylized sewing needle merged with smart factory chip icon, semi-flat illustration, elegant professional badge, cyan thread line motif, dark slate background, horizontal logo mark, no readable text, symbol only, clean corporate game branding"
+  },
+  {
+    "Path": "branding/hero-factory.webp",
+    "Ratio": "16:9",
+    "Prompt": "Wide hero illustration of a modern Vietnamese garment export factory at dusk, isometric semi-flat view, sewing floor with workers and automated cutting machines, shipping containers and export trucks in background, subtle digital hologram overlays showing IoT and AI, cinematic but not photorealistic, dark slate sky with cyan glow, hopeful industrial modernization mood, spacious composition with room for UI text overlay on the left third, educational strategy game art"
+  },
+  {
+    "Path": "branding/bg-pattern.webp",
+    "Ratio": "1:1",
+    "Prompt": "Seamless tileable industrial background pattern, subtle isometric grid with faint circuit traces and sewing machine icons, very low contrast, dark slate and cyan lines, minimal distraction, suitable as website background texture, repeatable tile, no focal object"
+  },
+  {
+    "Path": "branding/hero-industry-40.webp",
+    "Ratio": "16:9",
+    "Prompt": "Illustration of Vietnam Industry 4.0 transformation in garment manufacturing, split scene showing traditional sewing line evolving into smart factory with robots, IoT sensors and data dashboards as holograms, semi-flat isometric style, educational infographic mood, cyan technology highlights, dark background, clear visual storytelling of digital transformation without text labels"
+  },
+  {
+    "Path": "concepts/llsx-infographic.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational infographic icon illustration representing \"productive forces\" in a garment factory, robotic fabric cutter, AI camera inspection, automated conveyor, IoT sensor nodes, laser cutting machine, technology and tools of production, semi-flat isometric, cyan color theme, single centered concept cluster, dark slate background, clear visual metaphor for technology level, no text"
+  },
+  {
+    "Path": "concepts/qhsx-infographic.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational infographic icon illustration representing \"relations of production\" in a factory, skilled workers in training session, manager with clipboard, fair wage bonus envelope, safety procedures board, team collaboration and labor relations, semi-flat isometric, violet and soft purple color theme, dark slate background, human-centered composition, clear visual metaphor for management and labor relations level, no text"
+  },
+  {
+    "Path": "concepts/budget-infographic.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational infographic illustration of factory cash flow and budget management, coins and dollar bills flowing into and out of a small garment factory building, green emerald positive flow arrows and red outgoing cost arrows, semi-flat isometric style, financial health metaphor, dark slate background, clean and readable, no numbers or text"
+  },
+  {
+    "Path": "concepts/balance-diagram.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational balance scale diagram illustration, left side shows technology machines (LLSX), right side shows workers and management (QHSX), perfectly balanced scale in center, semi-flat isometric style, harmonious emerald glow, dark slate background, visual metaphor for equilibrium between technology and labor relations, no text labels"
+  },
+  {
+    "Path": "concepts/warning-diagram.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational warning diagram illustration, unbalanced scale tipping toward heavy technology side, advanced machines overwhelming confused workers on the lighter side, amber warning glow, semi-flat isometric style, operational risk mood, dark slate background, visual metaphor for technology outpacing human capability, no text"
+  },
+  {
+    "Path": "concepts/breakdown-diagram.webp",
+    "Ratio": "1:1",
+    "Prompt": "Educational crisis diagram illustration, technology breakdown in garment factory, malfunctioning AI cutting machine producing damaged fabric rolls, workers panicking, red danger accents, broken digital screen sparks as stylized icons not realistic fire, semi-flat isometric, dark slate background, clear \"technological fracture\" metaphor, no text"
+  },
+  {
+    "Path": "concepts/settlement-diagram.webp",
+    "Ratio": "4:3",
+    "Prompt": "Educational flowchart-style illustration of monthly factory settlement without readable text, three visual blocks connected by arrows: revenue from production output, operating costs from management, and penalty from imbalance, semi-flat isometric infographic, cyan and emerald accents, dark slate background, clean left-to-right flow, icon-based only"
+  },
+  {
+    "Path": "concepts/endings-overview.webp",
+    "Ratio": "16:9",
+    "Prompt": "Triptych illustration showing three factory outcomes side by side in one image, left: thriving green smart factory (success), center: broken machines and chaos (tech breakdown), right: closed dark factory gate and empty yard (economic lag), semi-flat isometric, educational comparison layout, consistent style across three panels, dark slate background, no text"
+  },
+  {
+    "Path": "factory/stage-early.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of a basic traditional Vietnamese garment workshop, old sewing machines, manual fabric cutting tables, small team of workers, modest factory building, low technology level, warm but dated equipment, dark slate environment, subtle cyan hints of future upgrade, humble starting phase mood"
+  },
+  {
+    "Path": "factory/stage-modernizing.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of a garment factory in modernization transition, mix of traditional sewing stations and new automated cutting line being installed, workers learning new machines, ERP dashboard screen on wall, balanced activity, cyan technology accents growing, dark slate background, mid-game progress mood"
+  },
+  {
+    "Path": "factory/stage-smart.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of a fully modern smart garment factory, robotic arms, AI quality inspection cameras, IoT energy sensors, digital twin hologram, efficient worker teams in harmony with automation, emerald and cyan glow, high technology level, dark slate background, advanced Industry 4.0 mood"
+  },
+  {
+    "Path": "factory/state-warning.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of garment factory under operational stress warning, fast running automated machines while workers look confused and overwhelmed, amber warning lights as simple icons, fabric pile mistakes visible, imbalance between machine speed and human skill, dark slate background, tense but not catastrophic"
+  },
+  {
+    "Path": "factory/state-breakdown.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of technological breakdown in garment factory, AI cutter jammed with tangled fabric, error screens flashing red, production line stopped, workers unable to operate advanced machines, red danger accents, chaotic but stylized, dark slate background, critical failure mood, educational game art not horror"
+  },
+  {
+    "Path": "factory/state-bankrupt.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of economically failed garment factory, dim lights, closed production lines, empty sewing stations, locked gate, unused machines covered with cloth, somber amber and gray tones, dark slate background, economic stagnation and bankruptcy mood, quiet and deserted, no text"
+  },
+  {
+    "Path": "factory/state-victory.webp",
+    "Ratio": "16:9",
+    "Prompt": "Isometric semi-flat illustration of sustainably modernized Vietnamese garment export factory, green ESG elements, efficient robotics with happy skilled workers, solar panels on roof, export trucks loading finished goods, emerald success glow, bright but still dark-theme compatible, triumphant sustainable industrialization mood, dark slate sky with green-cyan highlights"
+  },
+  {
+    "Path": "events/month-01.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration for garment factory digital transformation launch, Vietnamese factory manager standing at crossroads between old sewing line and futuristic AI production, government digitalization banner as abstract blue glow shapes without readable text, national Industry 4.0 campaign mood, semi-flat isometric 16:9, cyan highlights, dark slate background"
+  },
+  {
+    "Path": "events/month-02.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of EU trade delegation inspecting Vietnamese garment factory, inspectors with clipboards reviewing labor standards, workers in organized safe stations, export certification and international compliance mood, European and Vietnamese flags as color hints only, semi-flat isometric 16:9, professional tense atmosphere, dark slate background, no readable text"
+  },
+  {
+    "Path": "events/month-03.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of foreign salesman offering cheap used robotic sewing automation line, old robot machines with foreign language warning stickers as abstract symbols, factory owner evaluating risky low-cost upgrade, temptation vs caution mood, semi-flat isometric 16:9, amber and cyan contrast, dark slate background, no readable text"
+  },
+  {
+    "Path": "events/month-04.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of skills crisis in automated garment factory, workers struggling to operate new AI fabric cutter, damaged fabric rolls on floor, training gap between fast technology adoption and worker skills, semi-flat isometric 16:9, amber warning mood, dark slate background, educational storytelling, no text"
+  },
+  {
+    "Path": "events/month-05.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of government industrial modernization support program, Ministry representative presenting ERP software package and digital skills training, factory team attending upskilling workshop with laptops and tablets, semi-flat isometric 16:9, hopeful institutional support mood, cyan and violet accents, dark slate background"
+  },
+  {
+    "Path": "events/month-06.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of supply chain disruption via blockchain platform migration, foreign material supplier demanding API data connection, factory IT team connecting systems, shipping containers and digital blockchain chain as abstract glowing links, semi-flat isometric 16:9, high stakes global supply chain mood, dark slate background, no text"
+  },
+  {
+    "Path": "events/month-07.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of talent drain competition, large foreign-invested smart factory opening next door to smaller Vietnamese garment plant, attractive salary offers pulling engineers away, brain drain mood, semi-flat isometric 16:9, violet human resource theme, dark slate background, no text"
+  },
+  {
+    "Path": "events/month-08.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of ESG green manufacturing pressure on garment export factory, international buyer reviewing environmental compliance, IoT sensors monitoring energy usage, green leaf tech motif, sustainability standards mood, semi-flat isometric 16:9, emerald and cyan palette, dark slate background, no readable text"
+  },
+  {
+    "Path": "events/month-09.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of massive holiday season export order rush in garment factory, production floor at peak capacity, machines running at maximum speed, stacked order boxes, deadline pressure mood, semi-flat isometric 16:9, energetic cyan and amber accents, dark slate background"
+  },
+  {
+    "Path": "events/month-10.webp",
+    "Ratio": "16:9",
+    "Prompt": "Event scene illustration of final evaluation month for industrialization and modernization journey, panoramic smart garment factory with timeline hologram showing 10-month progress as abstract dots, reflective strategic summary mood, semi-flat isometric 16:9, balanced emerald and cyan glow, dark slate background"
+  },
+  {
+    "Path": "choices/month-01-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, investing in newest AI fabric cutting machine for garment factory, futuristic cutter scanning textile roll, expensive high-tech upgrade, cyan glow, semi-flat isometric 4:3, dark slate background, focused single object composition, no text"
+  },
+  {
+    "Path": "choices/month-01-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, keeping traditional old sewing production line running, manual machines and conservative cost-saving strategy, muted gray-blue tones, semi-flat isometric 4:3, dark slate background, steady but outdated mood, no text"
+  },
+  {
+    "Path": "choices/month-02-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, upgrading labor standards with full insurance and fair wage increase, happy workers in safe compliant factory stations, EU standard compliance mood, emerald and violet accents, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-02-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, continuing cheap labor outsourcing production model, high output focus with minimal worker benefits, cost-cutting mood, muted amber-gray tones, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-03-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, buying cheap imported used automation line immediately, old foreign robots installed quickly for productivity boost, risky bargain mood, cyan machine glow with amber risk hints, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-03-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, cautious factory optimization with maintenance and process improvement, technician tuning existing machines with wrench and checklist, prudent investment mood, balanced cyan-violet palette, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-05-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, synchronized digital transformation with ERP software rollout and worker digital skills training classroom, integrated tech and people upgrade, semi-flat isometric 4:3, cyan and violet harmony, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-05-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, factory going alone without government support program, small team managing outdated processes independently, short-term savings mood, desaturated slate tones, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-07-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, improving compensation with profit sharing and benefits to retain engineers, talented workers staying at Vietnamese garment factory, human capital investment mood, violet and emerald accents, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-07-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, engineers leaving factory for better foreign competitor offers, workers walking out gate toward shiny neighboring plant, talent loss mood, cool gray and faded violet tones, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-08-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, installing IoT sensor ecosystem for energy and process transparency, green manufacturing monitoring dashboard as hologram, ESG compliance mood, emerald and cyan palette, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-08-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, ignoring green trend and maximizing raw production output only, smoky inefficient machines and dissatisfied international buyer silhouette, gray-amber negative mood, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-09-a.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, overclocking production machines to maximum capacity for big order, machines overheating with speed lines and stress indicators, aggressive output push mood, intense cyan and amber accents, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "choices/month-09-b.webp",
+    "Ratio": "4:3",
+    "Prompt": "Choice card illustration, standardizing occupational safety procedures across factory, safety checklist, protective equipment, organized calm production flow, emerald stable mood, semi-flat isometric 4:3, dark slate background, no text"
+  },
+  {
+    "Path": "endings/sustainable-modernization.webp",
+    "Ratio": "16:9",
+    "Prompt": "Ending hero illustration, sustainable industrialization victory for Vietnamese garment factory, harmonious smart production with skilled workers and green ESG technology, export success and stable growth mood, emerald and cyan celebration glow, semi-flat isometric 16:9, dark slate background, uplifting educational game ending art, no text"
+  },
+  {
+    "Path": "endings/technology-breakdown.webp",
+    "Ratio": "16:9",
+    "Prompt": "Ending hero illustration, technological breakdown failure ending, advanced machines failed and mismatched with workforce capabilities, damaged fabric and production halt, red danger accents, dramatic but stylized, semi-flat isometric 16:9, dark slate background, cautionary failure mood, no text"
+  },
+  {
+    "Path": "endings/economic-lag.webp",
+    "Ratio": "16:9",
+    "Prompt": "Ending hero illustration, economic lag failure ending, closed underinvested garment factory falling behind global competition, empty production floor and missed export opportunities, somber amber-gray palette, semi-flat isometric 16:9, dark slate background, stagnation and decline mood, no text"
+  },
+  {
+    "Path": "characters/government-official.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, Vietnamese government industry official in formal attire, friendly authoritative presence, holding digital modernization tablet, semi-flat style bust portrait, cyan institutional accents, dark slate background, visual novel game character art, no text, 3:4 vertical"
+  },
+  {
+    "Path": "characters/eu-inspector.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, EU trade compliance inspector with clipboard, professional European business traveler in Vietnamese factory context, semi-flat style bust portrait, neutral blue-gray suit, dark slate background, visual novel game character art, no text, 3:4 vertical"
+  },
+  {
+    "Path": "characters/robot-salesman.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, foreign used-equipment salesman offering old industrial robots, persuasive but shady bargain dealer mood, semi-flat style bust portrait, amber accent lighting, dark slate background, visual novel game character art, no text, 3:4 vertical"
+  },
+  {
+    "Path": "characters/fie-executive.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, foreign-invested enterprise executive recruiting talent, polished corporate leader with competitive hiring offer vibe, semi-flat bust portrait, violet and cyan accents, dark slate background, visual novel game character art, no text, 3:4 vertical"
+  },
+  {
+    "Path": "characters/international-buyer.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, international fashion brand buyer evaluating ESG compliance, professional global client with sustainability checklist tablet, semi-flat bust portrait, emerald accent tones, dark slate background, visual novel game character art, no text, 3:4 vertical"
+  },
+  {
+    "Path": "characters/player-director.webp",
+    "Ratio": "3:4",
+    "Prompt": "Character portrait illustration, Vietnamese garment factory director as player avatar, confident mid-career manager, smart business casual with factory badge, approachable leadership presence, semi-flat bust portrait, cyan accent, dark slate background, visual novel protagonist style, no text, 3:4 vertical"
+  },
+  {
+    "Path": "ui/budget-healthy.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, healthy factory budget status, full coin stack with emerald upward arrow, semi-flat icon design, transparent background, centered, crisp edges, 512x512"
+  },
+  {
+    "Path": "ui/budget-tight.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, tight budget warning status, small coin pile with amber caution triangle, semi-flat icon design, transparent background, centered, crisp edges, 512x512"
+  },
+  {
+    "Path": "ui/budget-danger.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, critical budget danger status, empty wallet with red downward arrow, semi-flat icon design, transparent background, centered, crisp edges, 512x512"
+  },
+  {
+    "Path": "ui/llsx-levels.png",
+    "Ratio": "1:1",
+    "Prompt": "UI sprite sheet of 5 technology level icons for LLSX progression in garment factory, from basic sewing machine to advanced AI robotics, left to right increasing complexity, semi-flat icons on one row, transparent background, consistent size, game UI asset, no text"
+  },
+  {
+    "Path": "ui/qhsx-levels.png",
+    "Ratio": "1:1",
+    "Prompt": "UI sprite sheet of 5 labor relations level icons for QHSX progression, from basic worker group to advanced trained team with management systems, left to right increasing sophistication, semi-flat icons on one row, transparent background, no text"
+  },
+  {
+    "Path": "ui/delta-balanced.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, balanced scale symbol with emerald glow, harmony status badge, semi-flat icon, transparent background, 512x512, no text"
+  },
+  {
+    "Path": "ui/delta-warning.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, tilted unbalanced scale with amber warning triangle, risk status badge, semi-flat icon, transparent background, 512x512, no text"
+  },
+  {
+    "Path": "ui/delta-breakdown.png",
+    "Ratio": "1:1",
+    "Prompt": "UI game icon, broken scale and cracked machine cog with red danger symbol, critical status badge, semi-flat icon, transparent background, 512x512, no text"
+  },
+  {
+    "Path": "reports/monthly-header.webp",
+    "Ratio": "16:9",
+    "Prompt": "Wide decorative header illustration for monthly factory performance report screen, clipboard dashboard with charts as abstract shapes, garment factory mini scene, semi-flat isometric 16:9, cyan and emerald accents, dark slate background, top banner composition for UI header, no readable text"
+  },
+  {
+    "Path": "reports/history-chart-deco.webp",
+    "Ratio": "16:9",
+    "Prompt": "Decorative illustration companion for history line chart, rising trend of technology and management over time shown as dual glowing lines with factory silhouette background, semi-flat style 16:9, subtle and non-distracting, dark slate background, no numbers or text"
+  },
+  {
+    "Path": "reports/before-after-split.webp",
+    "Ratio": "16:9",
+    "Prompt": "Split before-and-after comparison illustration template for monthly choice impact, left panel slightly dimmer \"before\" factory state, right panel brighter \"after\" state, semi-flat isometric 16:9, clear vertical divide, dark slate background, no text labels"
+  },
+  {
+    "Path": "reports/imbalance-banner.webp",
+    "Ratio": "16:9",
+    "Prompt": "Wide warning banner illustration for production imbalance alert in garment factory, amber alert stripe composition with unbalanced machine and worker icons, semi-flat 16:9 horizontal banner, dark slate background, strong but clean visual, no readable text"
+  }
+]

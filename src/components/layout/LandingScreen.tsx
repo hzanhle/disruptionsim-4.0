@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion'
-import {
-  BookOpen,
-  Cpu,
-  Factory,
-  Play,
-  RotateCcw,
-  Sparkles,
-} from 'lucide-react'
+import { BookOpen, Play, RotateCcw, Sparkles } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,7 +10,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { AssetImage } from '@/components/shared/AssetImage'
 import { SoundToggle } from '@/components/shared/SoundToggle'
+import { branding } from '@/lib/gameAssets'
 import { unlockAudio, playSound } from '@/lib/soundManager'
 import { getSaveAvailability, useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -41,6 +36,11 @@ export function LandingScreen() {
     currentResolution,
     gameStatus,
   })
+
+  const logo = branding.logo()
+  const hero = branding.heroFactory()
+  const pattern = branding.bgPattern()
+  const industry = branding.heroIndustry()
 
   const beginNewGame = () => {
     unlockAudio()
@@ -73,23 +73,33 @@ export function LandingScreen() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),transparent_40%),radial-gradient(circle_at_bottom,_rgba(139,92,246,0.12),transparent_45%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(148,163,184,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.15)_1px,transparent_1px)] [background-size:40px_40px]" />
+      {hero ? (
+        <div className="pointer-events-none absolute inset-0">
+          <img
+            src={hero}
+            alt=""
+            className="h-full w-full object-cover opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/70" />
+        </div>
+      ) : (
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),transparent_40%),radial-gradient(circle_at_bottom,_rgba(139,92,246,0.12),transparent_45%)]" />
+      )}
 
-      {!reducedMotion ? (
-        <motion.div
-          className="pointer-events-none absolute -left-10 top-24 text-cyan-400/20"
-          animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 6, repeat: Infinity }}
-        >
-          <Factory className="h-32 w-32" />
-        </motion.div>
+      {pattern ? (
+        <div
+          className="pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light"
+          style={{ backgroundImage: `url(${pattern})`, backgroundSize: '420px' }}
+        />
       ) : null}
 
       <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-8 sm:px-6">
         <header className="mb-8 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-cyan-300">
-            <Cpu className="h-5 w-5" />
+          <div className="flex items-center gap-3 text-cyan-300">
+            {logo ? (
+              <img src={logo} alt="DISRUPTIONSIM" className="h-10 w-10 rounded-lg object-cover" />
+            ) : null}
             <span className="text-sm uppercase tracking-[0.2em]">Industry 4.0</span>
           </div>
           <SoundToggle />
@@ -113,13 +123,21 @@ export function LandingScreen() {
             </p>
           </motion.section>
 
-          <section className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 backdrop-blur-sm">
-            <div className="flex items-start gap-3">
-              <Sparkles className="mt-1 h-5 w-5 shrink-0 text-violet-400" />
-              <p className="text-sm leading-relaxed text-slate-300">
-                Quan hệ sản xuất phải phù hợp với trình độ phát triển của lực lượng sản xuất.
-                Bạn có 10 tháng để cân bằng công nghệ, con người, quản trị và ngân sách.
-              </p>
+          <section className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm">
+            <div className="grid gap-0 md:grid-cols-[1.1fr_0.9fr]">
+              <div className="flex items-start gap-3 p-5">
+                <Sparkles className="mt-1 h-5 w-5 shrink-0 text-violet-400" />
+                <p className="text-sm leading-relaxed text-slate-300">
+                  Quan hệ sản xuất phải phù hợp với trình độ phát triển của lực lượng sản xuất.
+                  Bạn có 10 tháng để cân bằng công nghệ, con người, quản trị và ngân sách.
+                </p>
+              </div>
+              <AssetImage
+                src={industry}
+                alt="Chuyển đổi số Industry 4.0 tại nhà máy may"
+                className="min-h-36 border-t border-slate-800 md:border-l md:border-t-0"
+                imgClassName="object-cover"
+              />
             </div>
           </section>
 
