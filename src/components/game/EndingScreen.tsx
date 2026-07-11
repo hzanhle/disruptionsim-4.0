@@ -71,7 +71,8 @@ export function EndingScreen() {
           <AssetImage
             src={hero}
             alt={meta.title}
-            className="aspect-[16/9] border-b border-white/10"
+            fit="cover"
+            className="aspect-video max-h-56 border-b border-white/10"
           />
           <CardHeader>
             <div className="flex items-center gap-3">

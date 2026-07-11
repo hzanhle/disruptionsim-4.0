@@ -62,8 +62,9 @@ export function ChoiceCards({
                 <AssetImage
                   src={image}
                   alt={choice.title}
-                  className="aspect-[4/3] border-b border-slate-800"
-                  imgClassName="object-cover"
+                  fit="cover"
+                  className="aspect-video max-h-28 border-b border-slate-800"
+                  imgClassName="object-center"
                 />
                 <CardHeader className="pb-2">
                   <div className="flex items-start gap-2">

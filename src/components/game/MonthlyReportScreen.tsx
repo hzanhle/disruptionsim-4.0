@@ -2,9 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { AssetImage } from '@/components/shared/AssetImage'
 import { TOTAL_MONTHS } from '@/lib/constants'
-import { assetUrl } from '@/lib/gameAssets'
 import { formatSigned } from '@/lib/utils'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
@@ -21,9 +19,6 @@ export function MonthlyReportScreen() {
 
   const settlement = resolution.settlement
   const isFinalMonth = resolution.month === TOTAL_MONTHS
-  const headerImage = assetUrl('reports/monthly-header.png')
-  const imbalanceBanner = assetUrl('reports/imbalance-banner.png')
-  const beforeAfter = assetUrl('reports/before-after-split.png')
 
   const handleContinue = () => {
     playSound('settlement')
@@ -46,12 +41,6 @@ export function MonthlyReportScreen() {
         animate={{ opacity: 1, y: 0 }}
         className="mx-auto max-w-3xl space-y-6"
       >
-        <AssetImage
-          src={headerImage}
-          alt=""
-          className="aspect-[16/7] rounded-2xl border border-slate-800"
-        />
-
         <div className="flex items-center gap-3">
           <FileText className="h-6 w-6 text-cyan-400" />
           <div>
@@ -122,12 +111,7 @@ export function MonthlyReportScreen() {
           </CardContent>
         </Card>
 
-        <Card className="overflow-hidden">
-          <AssetImage
-            src={beforeAfter}
-            alt="Trước và sau quyết định tháng"
-            className="aspect-[16/9] border-b border-slate-800"
-          />
+        <Card>
           <CardHeader>
             <CardTitle className="text-base">Chỉ số sau tháng</CardTitle>
           </CardHeader>
@@ -139,12 +123,7 @@ export function MonthlyReportScreen() {
         </Card>
 
         {settlement?.imbalanceWarning ? (
-          <Card className="overflow-hidden border-amber-500/40 bg-amber-950/10">
-            <AssetImage
-              src={imbalanceBanner}
-              alt=""
-              className="aspect-[16/5] border-b border-amber-500/20"
-            />
+          <Card className="border-amber-500/40 bg-amber-950/10">
             <CardContent className="p-5 text-sm text-amber-200">
               {settlement.imbalanceWarning}
             </CardContent>

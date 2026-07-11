@@ -46,7 +46,8 @@ export function FactoryStatusPanel({ budget, llsx, qhsx }: FactoryStatusProps) {
       <AssetImage
         src={visual}
         alt={`Trạng thái nhà máy: ${status.label}`}
-        className="aspect-[16/9] border-b border-slate-800"
+        fit="cover"
+        className="aspect-[2/1] max-h-40 border-b border-slate-800"
       />
       <CardHeader className="pb-2">
         <div className="flex items-center gap-2">

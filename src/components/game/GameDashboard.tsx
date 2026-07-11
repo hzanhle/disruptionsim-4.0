@@ -17,7 +17,6 @@ import { EventPanel } from '@/components/game/EventPanel'
 import { FactoryStatusPanel } from '@/components/game/FactoryStatusPanel'
 import { ActivityLog } from '@/components/game/ActivityLog'
 import { calculateDelta } from '@/lib/gameCalculations'
-import { budgetBadgeUrl, concepts } from '@/lib/gameAssets'
 import { useGameStore } from '@/store/gameStore'
 
 const HistoryChart = lazy(() =>
@@ -57,7 +56,6 @@ export function GameDashboard() {
             icon={DollarSign}
             tone="budget"
             format="budget"
-            imageSrc={budgetBadgeUrl(budget) ?? concepts.budget()}
           />
           <StatCard
             title="Trình độ LLSX"
@@ -65,7 +63,6 @@ export function GameDashboard() {
             value={llsx}
             icon={Cpu}
             tone="llsx"
-            imageSrc={concepts.llsx()}
           />
           <StatCard
             title="Trình độ QHSX"
@@ -73,7 +70,6 @@ export function GameDashboard() {
             value={qhsx}
             icon={Users}
             tone="qhsx"
-            imageSrc={concepts.qhsx()}
           />
         </div>
 

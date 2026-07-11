@@ -9,7 +9,6 @@ interface StatCardProps {
   icon: LucideIcon
   tone?: 'budget' | 'llsx' | 'qhsx' | 'neutral'
   format?: 'budget' | 'level' | 'delta'
-  imageSrc?: string
 }
 
 const toneClasses = {
@@ -26,7 +25,6 @@ export function StatCard({
   icon: Icon,
   tone = 'neutral',
   format = 'level',
-  imageSrc,
 }: StatCardProps) {
   const displayValue =
     typeof value === 'number'
@@ -38,17 +36,7 @@ export function StatCard({
       : value
 
   return (
-    <Card className={cn('overflow-hidden border', toneClasses[tone])}>
-      {imageSrc ? (
-        <div className="aspect-[16/9] border-b border-slate-800/80">
-          <img
-            src={imageSrc}
-            alt=""
-            className="h-full w-full object-cover opacity-90"
-            loading="lazy"
-          />
-        </div>
-      ) : null}
+    <Card className={cn('border', toneClasses[tone])}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between gap-3">
           <div>

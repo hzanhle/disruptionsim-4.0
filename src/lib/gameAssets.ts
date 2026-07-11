@@ -30,18 +30,8 @@ export function assetUrl(relativePath: string): string | undefined {
   )
 }
 
-export function requireAsset(relativePath: string): string {
-  const url = assetUrl(relativePath)
-  if (!url) {
-    console.warn(`[assets] Missing: ${relativePath}`)
-    return ''
-  }
-  return url
-}
-
 export const branding = {
   logo: () => assetUrl('branding/logo-disruptionsim.png'),
-  smartGarment: () => assetUrl('branding/logo-smartgarment.png'),
   heroFactory: () => assetUrl('branding/hero-factory.png'),
   heroIndustry: () => assetUrl('branding/hero-industry-40.png'),
   bgPattern: () => assetUrl('branding/bg-pattern.png'),
@@ -52,8 +42,6 @@ export const concepts = {
   qhsx: () => assetUrl('concepts/qhsx-infographic.png'),
   budget: () => assetUrl('concepts/budget-infographic.png'),
   balance: () => assetUrl('concepts/balance-diagram.png'),
-  warning: () => assetUrl('concepts/warning-diagram.png'),
-  breakdown: () => assetUrl('concepts/breakdown-diagram.png'),
   settlement: () => assetUrl('concepts/settlement-diagram.png'),
   endingsOverview: () => assetUrl('concepts/endings-overview.png'),
 }
@@ -101,32 +89,3 @@ export function factoryVisualUrl(input: {
   return assetUrl('factory/stage-early.png')
 }
 
-export function deltaBadgeUrl(delta: number): string | undefined {
-  if (delta >= 3) return assetUrl('ui/delta-breakdown.png')
-  if (delta === 2) return assetUrl('ui/delta-warning.png')
-  if (delta === 0) return assetUrl('ui/delta-balanced.png')
-  return assetUrl('ui/delta-warning.png')
-}
-
-export function budgetBadgeUrl(budget: number): string | undefined {
-  if (budget <= 0) return assetUrl('ui/budget-danger.png')
-  if (budget <= 20) return assetUrl('ui/budget-tight.png')
-  return assetUrl('ui/budget-healthy.png')
-}
-
-export function monthCharacterUrl(month: number): string | undefined {
-  const map: Record<number, string> = {
-    2: 'characters/eu-inspector.png',
-    3: 'characters/robot-salesman.png',
-    5: 'characters/government-official.png',
-    7: 'characters/fie-executive.png',
-    8: 'characters/international-buyer.png',
-  }
-  return assetUrl(map[month] ?? 'characters/player-director.png')
-}
-
-export function deltaConceptUrl(delta: number): string | undefined {
-  if (delta >= 3) return concepts.breakdown()
-  if (delta === 2) return concepts.warning()
-  return concepts.balance()
-}

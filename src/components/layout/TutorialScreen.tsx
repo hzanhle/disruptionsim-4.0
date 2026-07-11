@@ -2,7 +2,7 @@ import { ArrowLeft, BookOpenCheck, Scale, Wallet, Wrench, Trophy } from 'lucide-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AssetImage } from '@/components/shared/AssetImage'
-import { concepts, assetUrl } from '@/lib/gameAssets'
+import { concepts } from '@/lib/gameAssets'
 import { useGameStore } from '@/store/gameStore'
 
 const glossary = [
@@ -70,7 +70,8 @@ export function TutorialScreen() {
               <AssetImage
                 src={item.image()}
                 alt={item.title}
-                className="aspect-[16/10] border-b border-slate-800"
+                fit="contain"
+                className="aspect-square max-h-48 border-b border-slate-800"
               />
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-2">
@@ -87,9 +88,10 @@ export function TutorialScreen() {
 
         <Card className="overflow-hidden border-amber-500/30 bg-amber-950/10">
           <AssetImage
-            src={endingsOverview ?? assetUrl('concepts/endings-overview.png')}
+            src={endingsOverview}
             alt="Ba kết cục có thể xảy ra"
-            className="aspect-[16/9] border-b border-amber-500/20"
+            fit="contain"
+            className="aspect-video max-h-56 border-b border-amber-500/20"
           />
           <CardHeader>
             <CardTitle className="text-base">Ba kết cục có thể xảy ra</CardTitle>

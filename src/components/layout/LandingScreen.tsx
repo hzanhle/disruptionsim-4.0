@@ -135,8 +135,8 @@ export function LandingScreen() {
               <AssetImage
                 src={industry}
                 alt="Chuyển đổi số Industry 4.0 tại nhà máy may"
+                fit="contain"
                 className="min-h-36 border-t border-slate-800 md:border-l md:border-t-0"
-                imgClassName="object-cover"
               />
             </div>
           </section>
