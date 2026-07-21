@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const OUT = path.join(__dirname, '..', 'tmp-audit')
-const BASE = 'http://localhost:5173'
+const BASE = process.env.AUDIT_BASE ?? 'http://localhost:5173'
 
 fs.mkdirSync(OUT, { recursive: true })
 
@@ -153,6 +153,8 @@ async function main() {
     const wipe = page.getByRole('button', { name: /Xóa và bắt đầu mới/ })
     if (await wipe.isVisible().catch(() => false)) await wipe.click()
     await page.getByText('Khởi động làn sóng 4.0').waitFor({ timeout: 5000 })
+    await page.getByRole('button', { name: /Chạy theo công nghệ/ }).click()
+    await page.getByText('Sau lựa chọn').waitFor({ timeout: 3000 })
     await shot(page, '03-dashboard-month1')
     await page.close()
   }
@@ -163,6 +165,8 @@ async function main() {
     const cont = page.getByRole('button', { name: /Tiếp tục trò chơi/ })
     if (await cont.isVisible().catch(() => false)) await cont.click()
     await page.getByText('Áp lực từ Hội nhập').waitFor({ timeout: 5000 })
+    await page.getByRole('button', { name: /Đáp ứng tiêu chuẩn lao động/ }).click()
+    await page.getByText('Sau lựa chọn').waitFor({ timeout: 3000 })
     await shot(page, '04-dashboard-month2')
     await page.close()
   }

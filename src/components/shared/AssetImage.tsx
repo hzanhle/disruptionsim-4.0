@@ -3,15 +3,22 @@ import { cn } from '@/lib/utils'
 interface AssetImageProps {
   src?: string
   alt: string
+  /**
+   * Frame size classes. Use ONE of: aspect ratio OR fixed height/size — never both with max-height.
+   * Prefer `w-full aspect-video` for card heroes.
+   */
   className?: string
   imgClassName?: string
-  /** Default contain — safer for AI art. Use cover for scene/hero bleed. */
+  /** cover = fill frame (scenes). contain = letterbox inside frame (logos). */
   fit?: 'cover' | 'contain'
-  /** Soft inset inside a card so art is not flush to the border. */
+  /** Soft padding + inset ring so art is not flush to the card border. */
   inset?: boolean
 }
 
-/** Safe image wrapper — renders nothing when src is missing. */
+/**
+ * Safe image wrapper — renders nothing when src is missing.
+ * Frame is always sized by `className`; the img always fills that frame.
+ */
 export function AssetImage({
   src,
   alt,
@@ -25,11 +32,11 @@ export function AssetImage({
   const frame = (
     <div
       className={cn(
-        'overflow-hidden',
-        fit === 'contain' && 'flex items-center justify-center bg-slate-950',
-        inset && 'rounded-lg ring-1 ring-inset ring-slate-700/50',
-        !inset && className,
-        inset && 'h-full w-full',
+        'w-full overflow-hidden',
+        fit === 'contain' && 'bg-slate-950',
+        inset
+          ? 'h-full rounded-xl ring-1 ring-inset ring-slate-700/50'
+          : className,
       )}
     >
       <img
@@ -38,9 +45,8 @@ export function AssetImage({
         loading="lazy"
         decoding="async"
         className={cn(
-          fit === 'cover'
-            ? 'h-full w-full object-cover object-center'
-            : 'max-h-full max-w-full object-contain object-center',
+          'h-full w-full object-center',
+          fit === 'cover' ? 'object-cover' : 'object-contain',
           imgClassName,
         )}
       />
@@ -49,5 +55,5 @@ export function AssetImage({
 
   if (!inset) return frame
 
-  return <div className={cn('p-3', className)}>{frame}</div>
+  return <div className={cn('w-full p-1 sm:p-1.5', className)}>{frame}</div>
 }

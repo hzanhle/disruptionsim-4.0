@@ -14,6 +14,7 @@ import { AssetImage } from '@/components/shared/AssetImage'
 import { SoundToggle } from '@/components/shared/SoundToggle'
 import { branding } from '@/lib/gameAssets'
 import { unlockAudio, playSound } from '@/lib/soundManager'
+import { durations, easeOutSoft } from '@/lib/motion'
 import { getSaveAvailability, useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
@@ -113,9 +114,9 @@ export function LandingScreen() {
 
         <main className="flex flex-1 flex-col justify-center gap-7 sm:gap-8">
           <motion.section
-            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: durations.screen, ease: easeOutSoft }}
             className="space-y-3 sm:space-y-4"
           >
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">
@@ -131,9 +132,13 @@ export function LandingScreen() {
           </motion.section>
 
           <motion.section
-            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: durations.screen,
+              delay: reducedMotion ? 0 : durations.stagger,
+              ease: easeOutSoft,
+            }}
             className="rounded-2xl border border-slate-700/50 bg-slate-900/55 p-2.5 shadow-[var(--shadow-surface)] backdrop-blur-sm sm:p-3"
           >
             <div className="grid items-stretch gap-2.5 md:grid-cols-[1.15fr_0.85fr] md:gap-3">
@@ -148,7 +153,8 @@ export function LandingScreen() {
                 src={industry}
                 alt="Chuyển đổi số Industry 4.0 tại nhà máy may"
                 fit="cover"
-                className="min-h-36 rounded-xl ring-1 ring-inset ring-slate-600/40 md:min-h-full"
+                inset
+                className="aspect-video w-full md:aspect-auto md:h-full md:min-h-36"
               />
             </div>
           </motion.section>
@@ -156,7 +162,11 @@ export function LandingScreen() {
           <motion.div
             initial={reducedMotion ? false : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{
+              duration: durations.screen,
+              delay: reducedMotion ? 0 : durations.stagger * 2,
+              ease: easeOutSoft,
+            }}
             className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
           >
             <Button size="lg" onClick={handleStart}>

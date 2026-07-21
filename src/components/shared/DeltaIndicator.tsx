@@ -1,7 +1,8 @@
 import { AlertTriangle, Scale } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimatedNumber } from '@/components/shared/AnimatedNumber'
 import { signedTone } from '@/components/shared/MetricChip'
-import { cn, formatSigned } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 
 interface DeltaIndicatorProps {
   delta: number
@@ -33,8 +34,8 @@ export function DeltaIndicator({ delta }: DeltaIndicatorProps) {
         </div>
       </CardHeader>
       <CardContent className="space-y-2">
-        <p className={cn('font-mono text-4xl font-semibold tabular-nums', signedTone(delta))}>
-          {formatSigned(delta)}
+        <p className={cn('font-mono text-4xl font-semibold', signedTone(delta))}>
+          <AnimatedNumber value={delta} format="signed" flashOnChange />
         </p>
         <p className="text-base leading-relaxed text-slate-300">
           {isBreakdown

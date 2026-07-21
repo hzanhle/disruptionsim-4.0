@@ -73,8 +73,9 @@ export function TutorialScreen() {
                 <AssetImage
                   src={item.image()}
                   alt={item.title}
-                  fit="contain"
-                  className="h-24 w-24 shrink-0 rounded-lg ring-1 ring-inset ring-slate-700/50 sm:h-28 sm:w-28"
+                  fit="cover"
+                  inset
+                  className="size-24 shrink-0 sm:size-28"
                 />
                 <div className="min-w-0 flex-1 py-0.5">
                   <CardHeader className="p-0 pb-2">
@@ -94,17 +95,18 @@ export function TutorialScreen() {
           ))}
         </div>
 
-        <Card className="border-amber-500/30 bg-amber-950/10 p-3">
+        <Card className="overflow-hidden border-amber-500/30 bg-amber-950/10 pb-3">
           <AssetImage
             src={endingsOverview}
             alt="Ba kết cục có thể xảy ra"
-            fit="contain"
-            className="aspect-[2/1] max-h-40 rounded-lg ring-1 ring-inset ring-amber-500/20"
+            fit="cover"
+            inset
+            className="aspect-[2/1] w-full"
           />
-          <CardHeader className="px-1 pt-3">
+          <CardHeader className="px-4 pt-3">
             <CardTitle className="text-base">Ba kết cục có thể xảy ra</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2 px-1 pb-1 text-sm text-slate-300">
+          <CardContent className="space-y-2 px-4 pb-1 text-sm text-slate-300">
             <p>
               <strong className="text-red-300">Đứt gãy công nghệ:</strong> chênh lệch ≥ 3. Công nghệ
               vượt quá năng lực con người và quản trị.

@@ -8,6 +8,12 @@ import { MetricRow, signedTone } from '@/components/shared/MetricChip'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import {
+  easeOutSoft,
+  getMotionProps,
+  staggerContainer,
+  staggerItem,
+} from '@/lib/motion'
 
 export function MonthlyReportScreen() {
   const reducedMotion = useReducedMotion()
@@ -15,6 +21,7 @@ export function MonthlyReportScreen() {
   const ending = useGameStore((state) => state.ending)
   const advanceMonth = useGameStore((state) => state.advanceMonth)
   const viewEndingFromReport = useGameStore((state) => state.viewEndingFromReport)
+  const motionProps = getMotionProps(reducedMotion)
 
   if (!resolution) return null
 
@@ -35,14 +42,83 @@ export function MonthlyReportScreen() {
     advanceMonth()
   }
 
+  const ledgerRows: Array<{
+    key: string
+    label: string
+    value: string
+    signed?: number
+    tone?: 'budget' | 'llsx' | 'qhsx'
+  }> = [
+    {
+      key: 'start',
+      label: 'Ngân sách đầu tháng',
+      value: `$${resolution.before.budget}`,
+      tone: 'budget',
+    },
+    {
+      key: 'direct',
+      label: 'Tác động trực tiếp sự kiện',
+      value: formatSigned(resolution.directEffects.budget, '$'),
+      signed: resolution.directEffects.budget,
+    },
+  ]
+
+  if (resolution.specialBudgetChange !== 0) {
+    ledgerRows.push({
+      key: 'special',
+      label: 'Hệ quả đặc biệt',
+      value: formatSigned(resolution.specialBudgetChange, '$'),
+      signed: resolution.specialBudgetChange,
+    })
+  }
+
+  if (settlement) {
+    ledgerRows.push({
+      key: 'revenue',
+      label: 'Doanh thu cơ bản',
+      value: `+$${settlement.baseRevenue}`,
+      signed: settlement.baseRevenue,
+    })
+    if (settlement.revenueAdjustment !== 0) {
+      ledgerRows.push({
+        key: 'revAdj',
+        label: 'Điều chỉnh doanh thu',
+        value: formatSigned(settlement.revenueAdjustment, '$'),
+        signed: settlement.revenueAdjustment,
+      })
+    }
+    ledgerRows.push({
+      key: 'cost',
+      label: 'Chi phí vận hành',
+      value: `-$${settlement.operatingCost}`,
+      signed: -settlement.operatingCost,
+    })
+    if (settlement.imbalancePenalty > 0) {
+      ledgerRows.push({
+        key: 'penalty',
+        label: 'Phạt mất cân bằng',
+        value: `-$${settlement.imbalancePenalty}`,
+        signed: -settlement.imbalancePenalty,
+      })
+    }
+    ledgerRows.push({
+      key: 'net',
+      label: 'Thay đổi ròng tháng',
+      value: formatSigned(settlement.monthlyNet, '$'),
+      signed: settlement.monthlyNet,
+    })
+  }
+
+  ledgerRows.push({
+    key: 'end',
+    label: 'Ngân sách cuối tháng',
+    value: `$${resolution.after.budget}`,
+    tone: 'budget',
+  })
+
   return (
-    <div className="min-h-[100dvh] bg-transparent px-4 py-8 text-slate-100 sm:px-6">
-      <motion.div
-        initial={reducedMotion ? false : { opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-        className="mx-auto max-w-3xl space-y-6"
-      >
+    <div className="bg-transparent px-4 py-8 text-slate-100 sm:px-6">
+      <div className="mx-auto max-w-3xl space-y-6">
         <div className="flex items-center gap-3">
           <FileText className="h-6 w-6 text-cyan-400" strokeWidth={1.75} />
           <div>
@@ -71,62 +147,28 @@ export function MonthlyReportScreen() {
           <CardHeader>
             <CardTitle className="text-lg">Sổ cái quyết toán</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-1 text-base">
-            <Row label="Ngân sách đầu tháng" value={`$${resolution.before.budget}`} tone="budget" />
-            <Row
-              label="Tác động trực tiếp sự kiện"
-              value={formatSigned(resolution.directEffects.budget, '$')}
-              signed={resolution.directEffects.budget}
-            />
-            {resolution.specialBudgetChange !== 0 ? (
-              <Row
-                label="Hệ quả đặc biệt"
-                value={formatSigned(resolution.specialBudgetChange, '$')}
-                signed={resolution.specialBudgetChange}
-              />
-            ) : null}
-            {settlement ? (
-              <>
-                <Row
-                  label="Doanh thu cơ bản"
-                  value={`+$${settlement.baseRevenue}`}
-                  signed={settlement.baseRevenue}
-                />
-                {settlement.revenueAdjustment !== 0 ? (
-                  <Row
-                    label="Điều chỉnh doanh thu"
-                    value={formatSigned(settlement.revenueAdjustment, '$')}
-                    signed={settlement.revenueAdjustment}
-                  />
-                ) : null}
-                <Row
-                  label="Chi phí vận hành"
-                  value={`-$${settlement.operatingCost}`}
-                  signed={-settlement.operatingCost}
-                />
-                {settlement.imbalancePenalty > 0 ? (
-                  <Row
-                    label="Phạt mất cân bằng"
-                    value={`-$${settlement.imbalancePenalty}`}
-                    signed={-settlement.imbalancePenalty}
-                  />
-                ) : null}
-                <Row
-                  label="Thay đổi ròng tháng"
-                  value={formatSigned(settlement.monthlyNet, '$')}
-                  signed={settlement.monthlyNet}
-                />
-              </>
-            ) : (
-              <p className="text-base text-amber-300">
+          <CardContent className="text-base">
+            {settlement ? null : (
+              <p className="mb-3 text-base text-amber-300">
                 Quyết toán tháng bị dừng do kích hoạt kết cục ngay lập tức.
               </p>
             )}
-            <Row
-              label="Ngân sách cuối tháng"
-              value={`$${resolution.after.budget}`}
-              tone="budget"
-            />
+            <motion.div
+              className="space-y-1"
+              variants={staggerContainer}
+              {...motionProps}
+            >
+              {ledgerRows.map((row) => (
+                <motion.div key={row.key} variants={staggerItem}>
+                  <Row
+                    label={row.label}
+                    value={row.value}
+                    signed={row.signed}
+                    tone={row.tone}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
           </CardContent>
         </Card>
 
@@ -171,11 +213,21 @@ export function MonthlyReportScreen() {
           </CardContent>
         </Card>
 
-        <Button size="lg" onClick={handleContinue}>
-          {isFinalMonth || ending ? 'Xem tổng kết' : 'Sang tháng tiếp theo'}
-          <ArrowRight className="h-4 w-4" />
-        </Button>
-      </motion.div>
+        <motion.div
+          initial={reducedMotion ? false : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: reducedMotion ? 0 : 0.28,
+            duration: 0.28,
+            ease: easeOutSoft,
+          }}
+        >
+          <Button size="lg" onClick={handleContinue}>
+            {isFinalMonth || ending ? 'Xem tổng kết' : 'Sang tháng tiếp theo'}
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </motion.div>
+      </div>
     </div>
   )
 }
@@ -188,7 +240,6 @@ function Row({
 }: {
   label: string
   value: string
-  /** When set, colors the value green (+) / red (-) */
   signed?: number
   tone?: 'budget' | 'llsx' | 'qhsx'
 }) {

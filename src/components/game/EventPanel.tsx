@@ -13,10 +13,12 @@ import {
 import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { ChoiceCards } from '@/components/game/ChoiceCards'
 import { AssetImage } from '@/components/shared/AssetImage'
+import { ChoiceEffectPreview } from '@/components/shared/ChoiceEffectPreview'
+import { MetricChip } from '@/components/shared/MetricChip'
 import { getMonthEvent, isAutomaticEvent, isChoiceEvent, isFinaleEvent } from '@/data/monthEvents'
 import { eventSceneUrl } from '@/lib/gameAssets'
-import { MetricChip } from '@/components/shared/MetricChip'
 import { playSound } from '@/lib/soundManager'
+import { microTransition } from '@/lib/motion'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
@@ -30,6 +32,9 @@ export function EventPanel({ month }: EventPanelProps) {
   const pendingChoiceId = useGameStore((state) => state.pendingChoiceId)
   const choiceLocked = useGameStore((state) => state.choiceLocked)
   const isResolving = useGameStore((state) => state.isResolving)
+  const budget = useGameStore((state) => state.budget)
+  const llsx = useGameStore((state) => state.llsx)
+  const qhsx = useGameStore((state) => state.qhsx)
   const selectChoice = useGameStore((state) => state.selectChoice)
   const confirmChoice = useGameStore((state) => state.confirmChoice)
   const resolveAutomaticEvent = useGameStore((state) => state.resolveAutomaticEvent)
@@ -59,16 +64,18 @@ export function EventPanel({ month }: EventPanelProps) {
     <motion.section
       initial={reducedMotion ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={microTransition}
       className="space-y-4"
     >
-      <Card className="p-3">
+      <Card className="overflow-hidden pb-3">
         <AssetImage
           src={scene}
           alt={`Bối cảnh tháng ${month}: ${event.title}`}
           fit="cover"
-          className="aspect-[21/9] max-h-44 rounded-xl ring-1 ring-inset ring-slate-700/50"
+          inset
+          className="aspect-video w-full"
         />
-        <CardHeader className="px-1 pb-0 pt-3">
+        <CardHeader className="px-4 pb-0 pt-3">
           <CardTitle className="text-balance">{event.title}</CardTitle>
           <p className="text-base leading-relaxed text-pretty text-slate-300">
             {event.context}
@@ -82,11 +89,23 @@ export function EventPanel({ month }: EventPanelProps) {
             choices={event.choices}
             selectedId={pendingChoiceId}
             locked={choiceLocked || isResolving}
+            budget={budget}
+            llsx={llsx}
+            qhsx={qhsx}
             onSelect={(id) => {
               playSound('click')
               selectChoice(id)
             }}
           />
+          {selectedChoice && !choiceLocked ? (
+            <ChoiceEffectPreview
+              budget={budget}
+              llsx={llsx}
+              qhsx={qhsx}
+              effects={selectedChoice.effects}
+              choiceTitle={selectedChoice.title}
+            />
+          ) : null}
           <Button
             disabled={!pendingChoiceId || choiceLocked || isResolving}
             onClick={() => setConfirmOpen(true)}
@@ -128,28 +147,37 @@ export function EventPanel({ month }: EventPanelProps) {
             </DialogDescription>
           </DialogHeader>
           {selectedChoice ? (
-            <div className="grid grid-cols-3 gap-2">
-              <MetricChip
-                kind="budget"
-                label="Ngân sách"
-                value={selectedChoice.effects.budget}
-                signed
-                currency
-                size="sm"
-              />
-              <MetricChip
-                kind="llsx"
-                label="LLSX"
-                value={selectedChoice.effects.llsx}
-                signed
-                size="sm"
-              />
-              <MetricChip
-                kind="qhsx"
-                label="QHSX"
-                value={selectedChoice.effects.qhsx}
-                signed
-                size="sm"
+            <div className="space-y-3">
+              <div className="grid grid-cols-3 gap-2">
+                <MetricChip
+                  kind="budget"
+                  label="Ngân sách"
+                  value={selectedChoice.effects.budget}
+                  signed
+                  currency
+                  size="sm"
+                />
+                <MetricChip
+                  kind="llsx"
+                  label="LLSX"
+                  value={selectedChoice.effects.llsx}
+                  signed
+                  size="sm"
+                />
+                <MetricChip
+                  kind="qhsx"
+                  label="QHSX"
+                  value={selectedChoice.effects.qhsx}
+                  signed
+                  size="sm"
+                />
+              </div>
+              <ChoiceEffectPreview
+                budget={budget}
+                llsx={llsx}
+                qhsx={qhsx}
+                effects={selectedChoice.effects}
+                choiceTitle={selectedChoice.title}
               />
             </div>
           ) : null}

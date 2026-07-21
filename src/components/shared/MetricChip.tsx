@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { cn, formatBudget, formatSigned } from '@/lib/utils'
+import { cn, formatBudget, formatCurrency, formatSigned } from '@/lib/utils'
 
 export type MetricKind = 'budget' | 'llsx' | 'qhsx' | 'delta' | 'months'
 
@@ -47,9 +47,9 @@ interface MetricChipProps {
   kind: MetricKind
   label: string
   value: number
-  /** Show signed format (+1 / -30$) instead of absolute */
+  /** Show signed format (+1 / +$30) instead of absolute */
   signed?: boolean
-  /** Append $ for budget signed format */
+  /** Format as money when signed (+$25 / -$25) */
   currency?: boolean
   className?: string
   size?: 'sm' | 'md' | 'lg'
@@ -74,7 +74,9 @@ export function MetricChip({
   size = 'md',
 }: MetricChipProps) {
   const display = signed
-    ? formatSigned(value, currency ? '$' : '')
+    ? currency
+      ? formatCurrency(value)
+      : formatSigned(value)
     : kind === 'budget' || currency
       ? formatBudget(value)
       : String(value)

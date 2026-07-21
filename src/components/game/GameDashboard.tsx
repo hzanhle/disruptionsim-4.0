@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button'
 import { GameHeader } from '@/components/layout/GameHeader'
 import { StatCard } from '@/components/shared/StatCard'
 import { DeltaIndicator } from '@/components/shared/DeltaIndicator'
+import { MetricLegend } from '@/components/shared/MetricLegend'
 import { MonthTimeline } from '@/components/game/MonthTimeline'
 import { EventPanel } from '@/components/game/EventPanel'
 import { FactoryStatusPanel } from '@/components/game/FactoryStatusPanel'
@@ -36,7 +37,6 @@ export function GameDashboard() {
   const resetGame = useGameStore((state) => state.resetGame)
 
   const delta = calculateDelta(llsx, qhsx)
-  const completedMonths = history.map((entry) => entry.month)
 
   return (
     <div className="min-h-[100dvh] bg-transparent px-4 py-6 text-slate-100 sm:px-6">
@@ -47,7 +47,8 @@ export function GameDashboard() {
           onReset={() => setResetOpen(true)}
         />
 
-        <MonthTimeline currentMonth={currentMonth} completedMonths={completedMonths} />
+        <MonthTimeline currentMonth={currentMonth} history={history} />
+        <MetricLegend />
 
         <div className="grid gap-4 md:grid-cols-3">
           <StatCard

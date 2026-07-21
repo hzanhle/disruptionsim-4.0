@@ -1,9 +1,11 @@
-import { lazy, Suspense, useEffect, type ReactNode } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { Toaster, toast } from 'sonner'
 import { useGameHydration } from '@/hooks/useGameHydration'
 import { setSoundEnabled } from '@/lib/soundManager'
 import { LandingScreen } from '@/components/layout/LandingScreen'
 import { ScreenFallback } from '@/components/shared/ScreenFallback'
+import { ScreenTransition } from '@/components/shared/ScreenTransition'
 import { useGameStore } from '@/store/gameStore'
 
 const TutorialScreen = lazy(() =>
@@ -36,6 +38,7 @@ export function App() {
   const clearSaveNotice = useGameStore((state) => state.clearSaveNotice)
   const currentResolution = useGameStore((state) => state.currentResolution)
   const ending = useGameStore((state) => state.ending)
+  const currentMonth = useGameStore((state) => state.currentMonth)
 
   useEffect(() => {
     setSoundEnabled(soundEnabled)
@@ -66,33 +69,34 @@ export function App() {
     return <ScreenFallback message="Đang tải tiến trình..." />
   }
 
-  if (tutorialOpen) {
-    return (
-      <>
-        <Suspense fallback={<ScreenFallback />}>
-          <TutorialScreen />
-        </Suspense>
-        <Toaster richColors position="top-center" />
-      </>
-    )
-  }
+  const screenKey = tutorialOpen
+    ? 'tutorial'
+    : gameStatus === 'playing'
+      ? `playing-${currentMonth}`
+      : gameStatus === 'report'
+        ? `report-${currentResolution?.month ?? 'none'}`
+        : gameStatus
 
-  let screen: ReactNode
-  switch (gameStatus) {
-    case 'landing':
-      screen = <LandingScreen />
-      break
-    case 'playing':
-      screen = <GameDashboard />
-      break
-    case 'report':
-      screen = currentResolution ? <MonthlyReportScreen /> : <LandingScreen />
-      break
-    case 'ended':
-      screen = ending ? <EndingScreen /> : <LandingScreen />
-      break
-    default:
-      screen = <LandingScreen />
+  let screen = <LandingScreen />
+  if (tutorialOpen) {
+    screen = <TutorialScreen />
+  } else {
+    switch (gameStatus) {
+      case 'landing':
+        screen = <LandingScreen />
+        break
+      case 'playing':
+        screen = <GameDashboard />
+        break
+      case 'report':
+        screen = currentResolution ? <MonthlyReportScreen /> : <LandingScreen />
+        break
+      case 'ended':
+        screen = ending ? <EndingScreen /> : <LandingScreen />
+        break
+      default:
+        screen = <LandingScreen />
+    }
   }
 
   return (
@@ -100,9 +104,13 @@ export function App() {
       <a href="#main" className="skip-link">
         Bỏ qua đến nội dung
       </a>
-      <Suspense fallback={<ScreenFallback />}>
-        <div id="main">{screen}</div>
-      </Suspense>
+      <div id="main">
+        <AnimatePresence mode="wait">
+          <ScreenTransition key={screenKey}>
+            <Suspense fallback={<ScreenFallback />}>{screen}</Suspense>
+          </ScreenTransition>
+        </AnimatePresence>
+      </div>
       <Toaster richColors position="top-center" />
     </>
   )

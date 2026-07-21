@@ -6,6 +6,12 @@ import { AssetImage } from '@/components/shared/AssetImage'
 import { MetricRow } from '@/components/shared/MetricChip'
 import { calculateDelta } from '@/lib/gameCalculations'
 import { endingImageUrl } from '@/lib/gameAssets'
+import {
+  getMotionProps,
+  scaleIn,
+  staggerContainer,
+  staggerItem,
+} from '@/lib/motion'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -44,6 +50,8 @@ export function EndingScreen() {
   const history = useGameStore((state) => state.history)
   const resetGame = useGameStore((state) => state.resetGame)
   const reviewJourney = useGameStore((state) => state.reviewJourney)
+  const motionProps = getMotionProps(reducedMotion)
+
   if (!ending) return null
 
   const meta = endingMeta[ending.type]
@@ -62,67 +70,80 @@ export function EndingScreen() {
   }
 
   return (
-    <div className="min-h-[100dvh] bg-transparent px-4 py-8 text-slate-100 sm:px-6">
-      <motion.div
-        initial={reducedMotion ? false : { opacity: 0, scale: 0.98 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="mx-auto max-w-3xl space-y-6"
-      >
-        <Card className={`overflow-hidden p-3 ${meta.tone}`}>
-          <AssetImage
-            src={hero}
-            alt={meta.title}
-            fit="cover"
-            className="aspect-video max-h-52 rounded-xl ring-1 ring-inset ring-white/10"
-          />
-          <CardHeader className="px-1 pt-4">
-            <div className="flex items-center gap-3">
-              <Icon className="h-8 w-8" strokeWidth={1.75} />
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-80">
-                  {meta.status}
-                </p>
-                <CardTitle className="mt-1 text-2xl tracking-tight text-balance">
-                  {meta.title}
-                </CardTitle>
+    <div className="bg-transparent px-4 py-8 text-slate-100 sm:px-6">
+      <div className="mx-auto max-w-3xl space-y-6">
+        <motion.div variants={scaleIn} {...motionProps}>
+          <Card className={`overflow-hidden pb-3 ${meta.tone}`}>
+            <AssetImage
+              src={hero}
+              alt={meta.title}
+              fit="cover"
+              inset
+              className="aspect-video w-full"
+            />
+            <CardHeader className="px-4 pt-4">
+              <div className="flex items-center gap-3">
+                <Icon className="h-8 w-8" strokeWidth={1.75} />
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-80">
+                    {meta.status}
+                  </p>
+                  <CardTitle className="mt-1 text-2xl tracking-tight text-balance">
+                    {meta.title}
+                  </CardTitle>
+                </div>
               </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4 px-1 pb-1 text-base leading-relaxed text-pretty">
-            <p>{ending.message}</p>
-            {ending.reason ? (
-              <p className="text-sm opacity-80 sm:text-base">Lý do: {ending.reason}</p>
-            ) : null}
-          </CardContent>
-        </Card>
+            </CardHeader>
+            <CardContent className="space-y-4 px-4 pb-1 text-base leading-relaxed text-pretty">
+              <p>{ending.message}</p>
+              {ending.reason ? (
+                <p className="text-sm opacity-80 sm:text-base">Lý do: {ending.reason}</p>
+              ) : null}
+            </CardContent>
+          </Card>
+        </motion.div>
 
         <Card>
           <CardHeader>
             <CardTitle className="text-lg">Chỉ số cuối cùng</CardTitle>
           </CardHeader>
-          <CardContent className="grid gap-2.5 sm:grid-cols-2">
-            <MetricRow kind="budget" label="Ngân sách" value={`$${budget}`} />
-            <MetricRow kind="llsx" label="LLSX" value={llsx} />
-            <MetricRow kind="qhsx" label="QHSX" value={qhsx} />
-            <MetricRow
-              kind="delta"
-              label="Chênh lệch"
-              value={delta >= 0 ? `+${delta}` : String(delta)}
-              valueClassName={
-                delta > 0
-                  ? 'text-emerald-300'
-                  : delta < 0
-                    ? 'text-red-300'
-                    : undefined
-              }
-            />
-            <MetricRow
-              kind="months"
-              label="Số tháng hoàn thành"
-              value={history.length}
-              className="sm:col-span-2"
-            />
+          <CardContent>
+            <motion.div
+              className="grid gap-2.5 sm:grid-cols-2"
+              variants={staggerContainer}
+              {...motionProps}
+            >
+              <motion.div variants={staggerItem}>
+                <MetricRow kind="budget" label="Ngân sách" value={`$${budget}`} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <MetricRow kind="llsx" label="LLSX" value={llsx} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <MetricRow kind="qhsx" label="QHSX" value={qhsx} />
+              </motion.div>
+              <motion.div variants={staggerItem}>
+                <MetricRow
+                  kind="delta"
+                  label="Chênh lệch"
+                  value={delta >= 0 ? `+${delta}` : String(delta)}
+                  valueClassName={
+                    delta > 0
+                      ? 'text-emerald-300'
+                      : delta < 0
+                        ? 'text-red-300'
+                        : undefined
+                  }
+                />
+              </motion.div>
+              <motion.div variants={staggerItem} className="sm:col-span-2">
+                <MetricRow
+                  kind="months"
+                  label="Số tháng hoàn thành"
+                  value={history.length}
+                />
+              </motion.div>
+            </motion.div>
           </CardContent>
         </Card>
 
@@ -140,7 +161,9 @@ export function EndingScreen() {
                   <p className="font-medium text-slate-100">
                     Tháng {entry.month}: {entry.selectedChoiceTitle ?? 'Sự kiện tự động'}
                   </p>
-                  <p className="mt-0.5 text-sm text-slate-400 sm:text-base">{entry.eventMessage}</p>
+                  <p className="mt-0.5 text-sm text-slate-400 sm:text-base">
+                    {entry.eventMessage}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -164,7 +187,7 @@ export function EndingScreen() {
             Xem lại hành trình
           </Button>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

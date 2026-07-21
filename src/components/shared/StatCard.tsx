@@ -1,11 +1,12 @@
 import type { LucideIcon } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn, formatBudget, formatSigned } from '@/lib/utils'
+import { AnimatedNumber } from '@/components/shared/AnimatedNumber'
+import { cn } from '@/lib/utils'
 
 interface StatCardProps {
   title: string
   subtitle?: string
-  value: number | string
+  value: number
   icon: LucideIcon
   tone?: 'budget' | 'llsx' | 'qhsx' | 'neutral'
   format?: 'budget' | 'level' | 'delta'
@@ -26,14 +27,8 @@ export function StatCard({
   tone = 'neutral',
   format = 'level',
 }: StatCardProps) {
-  const displayValue =
-    typeof value === 'number'
-      ? format === 'budget'
-        ? formatBudget(value)
-        : format === 'delta'
-          ? formatSigned(value)
-          : String(value)
-      : value
+  const numberFormat =
+    format === 'budget' ? 'budget' : format === 'delta' ? 'signed' : 'plain'
 
   return (
     <Card className={cn('border transition-colors duration-300', toneClasses[tone])}>
@@ -49,8 +44,8 @@ export function StatCard({
         </div>
       </CardHeader>
       <CardContent>
-        <p className="font-mono text-4xl font-semibold tracking-tight tabular-nums">
-          {displayValue}
+        <p className="font-mono text-4xl font-semibold tracking-tight">
+          <AnimatedNumber value={value} format={numberFormat} flashOnChange />
         </p>
       </CardContent>
     </Card>
