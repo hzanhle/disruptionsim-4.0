@@ -29,13 +29,13 @@ import type {
 } from '@/types/game'
 
 const TECH_BREAKDOWN_MESSAGE =
-  'Bạn đã thất bại! Bạn cố chấp nhập khẩu những công nghệ tối tân nhất (LLSX) nhưng QHSX — trình độ con người và năng lực quản lý — của xưởng chỉ ở mức nguyên thủy. Máy móc tiền tỷ bị đắp chiếu, công nhân đình công vì áp lực và bất công. Sự đứt gãy này chứng minh quy luật: QHSX phải phù hợp với trình độ của LLSX!'
+  'Bạn đã thất bại. Bạn cố chấp nhập khẩu những công nghệ tối tân nhất (LLSX) nhưng QHSX (trình độ con người và năng lực quản lý) của xưởng chỉ ở mức nguyên thủy. Máy móc tiền tỷ bị đắp chiếu, công nhân đình công vì áp lực và bất công. Sự đứt gãy này chứng minh quy luật: QHSX phải phù hợp với trình độ của LLSX.'
 
 const ECONOMIC_LAG_BASE_MESSAGE =
-  'Bạn đã thất bại! Vì quá sợ rủi ro đứt gãy, bạn giữ xưởng may ở mô hình thủ công lỗi thời. Doanh nghiệp của bạn bị quét sạch khỏi chuỗi giá trị toàn cầu, phản ánh đúng nguy cơ tụt hậu của các quốc gia không kịp đón đầu CMCN 4.0 trong tiến trình CNH-HĐH.'
+  'Bạn đã thất bại. Vì quá sợ rủi ro đứt gãy, bạn giữ xưởng may ở mô hình thủ công lỗi thời. Doanh nghiệp của bạn bị quét sạch khỏi chuỗi giá trị toàn cầu, phản ánh đúng nguy cơ tụt hậu của các quốc gia không kịp đón đầu CMCN 4.0 trong tiến trình CNH-HĐH.'
 
 const VICTORY_MESSAGE =
-  'Chúc mừng! Bạn đã đưa SmartGarment Việt Nam vượt qua đứt gãy công nghệ thành công. Bằng tư duy biện chứng, bạn luôn giữ sự cân bằng giữa phát triển công cụ số (LLSX) và nâng cao trình độ con người, quy trình quản lý (QHSX). Xưởng may của bạn hiện đã dịch chuyển sang mô hình Kinh tế tri thức, đóng góp vào sự nghiệp hiện đại hóa đất nước!'
+  'Bạn đã đưa SmartGarment Việt Nam vượt qua đứt gãy công nghệ thành công. Bằng tư duy biện chứng, bạn luôn giữ sự cân bằng giữa phát triển công cụ số (LLSX) và nâng cao trình độ con người, quy trình quản lý (QHSX). Xưởng may của bạn hiện đã dịch chuyển sang mô hình Kinh tế tri thức, đóng góp vào sự nghiệp hiện đại hóa đất nước.'
 
 export interface ResolveMonthInput {
   month: number
@@ -108,7 +108,7 @@ export function evaluateFinalEnding(snapshot: GameSnapshot): EndingResult {
 }
 
 function buildBankruptcyMessage(budget: number): string {
-  return `Bạn đã thất bại! Ngân sách xưởng cạn kiệt (${budget <= 0 ? '≤ $0' : `$${budget}`}). SmartGarment Việt Nam không thể duy trì sản xuất và bị loại khỏi chuỗi giá trị toàn cầu. Đây là hậu quả của việc không cân bằng đầu tư công nghệ, chi phí vận hành và quản trị nhân sự.`
+  return `Bạn đã thất bại. Ngân sách xưởng cạn kiệt (${budget <= 0 ? '≤ $0' : `$${budget}`}). SmartGarment Việt Nam không thể duy trì sản xuất và bị loại khỏi chuỗi giá trị toàn cầu. Đây là hậu quả của việc không cân bằng đầu tư công nghệ, chi phí vận hành và quản trị nhân sự.`
 }
 
 function buildEconomicLagFallbackMessage(
@@ -117,7 +117,7 @@ function buildEconomicLagFallbackMessage(
 ): string {
   const intro =
     snapshot.llsx >= 3
-      ? 'Bạn đã thất bại! Dù đã đầu tư công nghệ, nhà máy vẫn chưa hoàn thiện mô hình CNH-HĐH bền vững.'
+      ? 'Bạn đã thất bại. Dù đã đầu tư công nghệ, nhà máy vẫn chưa hoàn thiện mô hình CNH-HĐH bền vững.'
       : ECONOMIC_LAG_BASE_MESSAGE
 
   return `${intro} ${reasons.join(' ')}`

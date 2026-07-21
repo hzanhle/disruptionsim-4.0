@@ -23,7 +23,7 @@ export function MonthTimeline({ currentMonth, completedMonths }: MonthTimelinePr
           <li
             key={month}
             className={cn(
-              'rounded-lg border px-2 py-2 text-center text-xs sm:text-sm',
+              'rounded-lg border px-2 py-2 text-center text-xs font-medium tabular-nums transition-colors duration-300 sm:text-sm',
               isCompleted && 'border-emerald-500/40 bg-emerald-950/20 text-emerald-300',
               isCurrent && !isCompleted && 'border-cyan-500/50 bg-cyan-950/20 text-cyan-200',
               !isCompleted && !isCurrent && 'border-slate-800 bg-slate-900/40 text-slate-500',

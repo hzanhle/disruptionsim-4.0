@@ -1,5 +1,6 @@
 import { AlertTriangle, Scale } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { signedTone } from '@/components/shared/MetricChip'
 import { cn, formatSigned } from '@/lib/utils'
 
 interface DeltaIndicatorProps {
@@ -28,21 +29,23 @@ export function DeltaIndicator({ delta }: DeltaIndicatorProps) {
           ) : (
             <Scale className="h-5 w-5 text-slate-300" aria-hidden="true" />
           )}
-          <CardTitle className="text-base">Chênh lệch LLSX − QHSX</CardTitle>
+          <CardTitle className="text-lg">Chênh lệch LLSX - QHSX</CardTitle>
         </div>
       </CardHeader>
       <CardContent className="space-y-2">
-        <p className="text-3xl font-bold">{formatSigned(delta)}</p>
-        <p className="text-sm text-slate-300">
+        <p className={cn('font-mono text-4xl font-semibold tabular-nums', signedTone(delta))}>
+          {formatSigned(delta)}
+        </p>
+        <p className="text-base leading-relaxed text-slate-300">
           {isBreakdown
-            ? 'Nguy cơ đứt gãy công nghệ! QHSX quá thấp so với LLSX.'
+            ? 'Nguy cơ đứt gãy công nghệ. QHSX quá thấp so với LLSX.'
             : isWarning
               ? 'Cảnh báo: LLSX và QHSX đang lệch nhau, có thể phát sinh hao hụt vận hành.'
               : isBalanced
                 ? 'Cân bằng tốt giữa công nghệ và quan hệ sản xuất.'
                 : delta > 0
-                  ? 'LLSX cao hơn QHSX — cần nâng năng lực con người và quản trị.'
-                  : 'QHSX cao hơn LLSX — có thể tận dụng để đầu tư thêm công nghệ.'}
+                  ? 'LLSX cao hơn QHSX: cần nâng năng lực con người và quản trị.'
+                  : 'QHSX cao hơn LLSX: có thể tận dụng để đầu tư thêm công nghệ.'}
         </p>
       </CardContent>
     </Card>

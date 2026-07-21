@@ -39,7 +39,7 @@ export function GameDashboard() {
   const completedMonths = history.map((entry) => entry.month)
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-6 text-slate-100 sm:px-6">
+    <div className="min-h-[100dvh] bg-transparent px-4 py-6 text-slate-100 sm:px-6">
       <div className="mx-auto max-w-6xl space-y-6">
         <GameHeader
           currentMonth={currentMonth}
@@ -59,14 +59,14 @@ export function GameDashboard() {
           />
           <StatCard
             title="Trình độ LLSX"
-            subtitle="Lực lượng sản xuất — Công nghệ và công cụ lao động"
+            subtitle="Lực lượng sản xuất: công nghệ và công cụ lao động"
             value={llsx}
             icon={Cpu}
             tone="llsx"
           />
           <StatCard
             title="Trình độ QHSX"
-            subtitle="Quan hệ sản xuất — Quản lý, con người và cơ chế phân phối"
+            subtitle="Quan hệ sản xuất: quản lý, con người và cơ chế phân phối"
             value={qhsx}
             icon={Users}
             tone="qhsx"

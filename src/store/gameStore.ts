@@ -308,6 +308,25 @@ export const useGameStore = create<GameStore>()(
         ending: state.ending,
         soundEnabled: state.soundEnabled,
       }),
+      merge: (persisted, current) => {
+        const incoming =
+          persisted && typeof persisted === 'object'
+            ? (persisted as Record<string, unknown>)
+            : {}
+        const {
+          hasHydrated: _ignored,
+          saveNotice: _notice,
+          isResolving: _resolving,
+          tutorialOpen: _tutorial,
+          previousScreen: _previous,
+          ...rest
+        } = incoming
+        return {
+          ...current,
+          ...rest,
+          hasHydrated: false,
+        }
+      },
       onRehydrateStorage: () => (_state, error) => {
         if (error) {
           pendingSaveNotice =

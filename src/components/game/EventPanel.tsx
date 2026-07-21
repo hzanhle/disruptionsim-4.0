@@ -15,6 +15,7 @@ import { ChoiceCards } from '@/components/game/ChoiceCards'
 import { AssetImage } from '@/components/shared/AssetImage'
 import { getMonthEvent, isAutomaticEvent, isChoiceEvent, isFinaleEvent } from '@/data/monthEvents'
 import { eventSceneUrl } from '@/lib/gameAssets'
+import { MetricChip } from '@/components/shared/MetricChip'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -60,16 +61,18 @@ export function EventPanel({ month }: EventPanelProps) {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-4"
     >
-      <Card className="overflow-hidden">
+      <Card className="p-3">
         <AssetImage
           src={scene}
           alt={`Bối cảnh tháng ${month}: ${event.title}`}
           fit="cover"
-          className="aspect-[21/9] max-h-48 border-b border-slate-800"
+          className="aspect-[21/9] max-h-44 rounded-xl ring-1 ring-inset ring-slate-700/50"
         />
-        <CardHeader>
-          <CardTitle>{event.title}</CardTitle>
-          <p className="text-sm leading-relaxed text-slate-300">{event.context}</p>
+        <CardHeader className="px-1 pb-0 pt-3">
+          <CardTitle className="text-balance">{event.title}</CardTitle>
+          <p className="text-base leading-relaxed text-pretty text-slate-300">
+            {event.context}
+          </p>
         </CardHeader>
       </Card>
 
@@ -125,10 +128,29 @@ export function EventPanel({ month }: EventPanelProps) {
             </DialogDescription>
           </DialogHeader>
           {selectedChoice ? (
-            <div className="rounded-lg border border-slate-700 bg-slate-900/60 p-3 text-sm text-slate-300">
-              <p>Ngân sách: {selectedChoice.effects.budget >= 0 ? '+' : ''}${Math.abs(selectedChoice.effects.budget)}</p>
-              <p>LLSX: {selectedChoice.effects.llsx >= 0 ? '+' : ''}{selectedChoice.effects.llsx}</p>
-              <p>QHSX: {selectedChoice.effects.qhsx >= 0 ? '+' : ''}{selectedChoice.effects.qhsx}</p>
+            <div className="grid grid-cols-3 gap-2">
+              <MetricChip
+                kind="budget"
+                label="Ngân sách"
+                value={selectedChoice.effects.budget}
+                signed
+                currency
+                size="sm"
+              />
+              <MetricChip
+                kind="llsx"
+                label="LLSX"
+                value={selectedChoice.effects.llsx}
+                signed
+                size="sm"
+              />
+              <MetricChip
+                kind="qhsx"
+                label="QHSX"
+                value={selectedChoice.effects.qhsx}
+                signed
+                size="sm"
+              />
             </div>
           ) : null}
           <DialogFooter>

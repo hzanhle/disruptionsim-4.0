@@ -97,7 +97,12 @@ export function App() {
 
   return (
     <>
-      <Suspense fallback={<ScreenFallback />}>{screen}</Suspense>
+      <a href="#main" className="skip-link">
+        Bỏ qua đến nội dung
+      </a>
+      <Suspense fallback={<ScreenFallback />}>
+        <div id="main">{screen}</div>
+      </Suspense>
       <Toaster richColors position="top-center" />
     </>
   )

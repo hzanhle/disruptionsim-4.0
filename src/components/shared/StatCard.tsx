@@ -36,20 +36,22 @@ export function StatCard({
       : value
 
   return (
-    <Card className={cn('border', toneClasses[tone])}>
+    <Card className={cn('border transition-colors duration-300', toneClasses[tone])}>
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between gap-3">
           <div>
-            <CardTitle className="text-base">{title}</CardTitle>
+            <CardTitle className="text-base font-semibold sm:text-lg">{title}</CardTitle>
             {subtitle ? (
-              <p className="mt-1 text-xs text-slate-400">{subtitle}</p>
+              <p className="mt-1 text-sm leading-relaxed text-slate-400">{subtitle}</p>
             ) : null}
           </div>
-          <Icon className="h-5 w-5 shrink-0 opacity-80" aria-hidden="true" />
+          <Icon className="h-5 w-5 shrink-0 opacity-75" aria-hidden="true" strokeWidth={1.75} />
         </div>
       </CardHeader>
       <CardContent>
-        <p className="text-3xl font-bold tracking-tight">{displayValue}</p>
+        <p className="font-mono text-4xl font-semibold tracking-tight tabular-nums">
+          {displayValue}
+        </p>
       </CardContent>
     </Card>
   )

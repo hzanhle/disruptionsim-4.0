@@ -72,62 +72,74 @@ export function LandingScreen() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
+    <div className="relative min-h-[100dvh] overflow-hidden bg-transparent text-slate-100">
       {hero ? (
         <div className="pointer-events-none absolute inset-0">
           <img
             src={hero}
             alt=""
-            className="h-full w-full object-cover opacity-35"
+            className="h-full w-full object-cover opacity-40"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-950/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/88 to-slate-950/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/75" />
         </div>
       ) : (
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.12),transparent_40%),radial-gradient(circle_at_bottom,_rgba(139,92,246,0.12),transparent_45%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.14),transparent_42%),radial-gradient(circle_at_bottom,_rgba(8,47,73,0.35),transparent_50%)]" />
       )}
 
       {pattern ? (
         <div
-          className="pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light"
+          className="pointer-events-none absolute inset-0 opacity-20 mix-blend-soft-light"
           style={{ backgroundImage: `url(${pattern})`, backgroundSize: '420px' }}
         />
       ) : null}
 
-      <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col px-4 py-8 sm:px-6">
-        <header className="mb-8 flex items-center justify-between">
+      <div className="relative mx-auto flex min-h-[100dvh] max-w-5xl flex-col px-4 py-7 sm:px-6 sm:py-8">
+        <header className="mb-6 flex items-center justify-between sm:mb-8">
           <div className="flex items-center gap-3 text-cyan-300">
             {logo ? (
-              <img src={logo} alt="DISRUPTIONSIM" className="h-10 w-10 rounded-lg object-cover" />
+              <img
+                src={logo}
+                alt="DISRUPTIONSIM"
+                className="h-10 w-10 rounded-xl object-contain ring-1 ring-cyan-500/20"
+              />
             ) : null}
-            <span className="text-sm uppercase tracking-[0.2em]">Industry 4.0</span>
+            <span className="text-xs font-medium uppercase tracking-[0.22em]">
+              Industry 4.0
+            </span>
           </div>
           <SoundToggle />
         </header>
 
-        <main className="flex flex-1 flex-col justify-center gap-8">
+        <main className="flex flex-1 flex-col justify-center gap-7 sm:gap-8">
           <motion.section
-            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-4"
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-3 sm:space-y-4"
           >
-            <p className="text-sm font-medium uppercase tracking-[0.25em] text-cyan-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-400">
               SmartGarment Việt Nam
             </p>
-            <h1 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">
+            <h1 className="max-w-4xl text-4xl font-bold tracking-[-0.03em] text-balance sm:text-6xl sm:leading-[1.05]">
               DISRUPTIONSIM 4.0
             </h1>
-            <p className="max-w-2xl text-lg text-slate-300">
-              Mô phỏng quản trị nhà máy may xuất khẩu trong hành trình công nghiệp hóa,
-              hiện đại hóa và chuyển đổi số — nơi LLSX và QHSX phải phát triển hài hòa.
+            <p className="max-w-[42rem] text-base leading-relaxed text-pretty text-slate-300 sm:text-lg">
+              Mô phỏng quản trị nhà máy may xuất khẩu trên hành trình CNH-HĐH và chuyển đổi số.
+              LLSX và QHSX phải phát triển hài hòa.
             </p>
           </motion.section>
 
-          <section className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm">
-            <div className="grid gap-0 md:grid-cols-[1.1fr_0.9fr]">
-              <div className="flex items-start gap-3 p-5">
-                <Sparkles className="mt-1 h-5 w-5 shrink-0 text-violet-400" />
-                <p className="text-sm leading-relaxed text-slate-300">
+          <motion.section
+            initial={reducedMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+            className="rounded-2xl border border-slate-700/50 bg-slate-900/55 p-2.5 shadow-[var(--shadow-surface)] backdrop-blur-sm sm:p-3"
+          >
+            <div className="grid items-stretch gap-2.5 md:grid-cols-[1.15fr_0.85fr] md:gap-3">
+              <div className="flex items-start gap-3 rounded-xl bg-slate-950/50 p-4">
+                <Sparkles className="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" />
+                <p className="max-w-prose text-sm leading-relaxed text-pretty text-slate-300">
                   Quan hệ sản xuất phải phù hợp với trình độ phát triển của lực lượng sản xuất.
                   Bạn có 10 tháng để cân bằng công nghệ, con người, quản trị và ngân sách.
                 </p>
@@ -135,13 +147,18 @@ export function LandingScreen() {
               <AssetImage
                 src={industry}
                 alt="Chuyển đổi số Industry 4.0 tại nhà máy may"
-                fit="contain"
-                className="min-h-36 border-t border-slate-800 md:border-l md:border-t-0"
+                fit="cover"
+                className="min-h-36 rounded-xl ring-1 ring-inset ring-slate-600/40 md:min-h-full"
               />
             </div>
-          </section>
+          </motion.section>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <motion.div
+            initial={reducedMotion ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+          >
             <Button size="lg" onClick={handleStart}>
               <Play className="h-4 w-4" />
               Bắt đầu trò chơi
@@ -161,7 +178,7 @@ export function LandingScreen() {
                 Chơi lại từ đầu
               </Button>
             ) : null}
-          </div>
+          </motion.div>
         </main>
       </div>
 

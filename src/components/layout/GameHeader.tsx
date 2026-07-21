@@ -27,14 +27,16 @@ export function GameHeader({
             <img
               src={logo}
               alt=""
-              className="h-11 w-11 rounded-xl border border-slate-700 object-cover"
+              className="h-11 w-11 rounded-xl object-contain ring-1 ring-slate-700/70"
             />
           ) : null}
           <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-cyan-400">
               SmartGarment Việt Nam
             </p>
-            <h1 className="text-2xl font-bold sm:text-3xl">DISRUPTIONSIM 4.0</h1>
+            <h1 className="text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
+              DISRUPTIONSIM 4.0
+            </h1>
           </div>
         </div>
         <div className="flex items-center gap-2">

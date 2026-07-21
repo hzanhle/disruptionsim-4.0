@@ -1,6 +1,7 @@
 import { Activity, AlertCircle, CheckCircle2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AssetImage } from '@/components/shared/AssetImage'
+import { MetricChip } from '@/components/shared/MetricChip'
 import { calculateDelta } from '@/lib/gameCalculations'
 import { factoryVisualUrl } from '@/lib/gameAssets'
 
@@ -42,29 +43,30 @@ export function FactoryStatusPanel({ budget, llsx, qhsx }: FactoryStatusProps) {
   const StatusIcon = status.icon
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="p-3">
       <AssetImage
         src={visual}
         alt={`Trạng thái nhà máy: ${status.label}`}
         fit="cover"
-        className="aspect-[2/1] max-h-40 border-b border-slate-800"
+        className="aspect-[2/1] max-h-36 rounded-xl ring-1 ring-inset ring-slate-700/50"
       />
-      <CardHeader className="pb-2">
+      <CardHeader className="px-1 pb-2 pt-3">
         <div className="flex items-center gap-2">
           <Activity className="h-5 w-5 text-cyan-400" />
-          <CardTitle className="text-base">Trạng thái nhà máy</CardTitle>
+          <CardTitle className="text-lg">Trạng thái nhà máy</CardTitle>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3 text-sm text-slate-300">
-        <p className={status.tone}>
-          <StatusIcon className="mr-2 inline h-4 w-4" />
+      <CardContent className="space-y-3 px-1 pb-1">
+        <p className={`text-base font-medium ${status.tone}`}>
+          <StatusIcon className="mr-2 inline h-5 w-5" />
           {status.label}
         </p>
-        <p>
-          LLSX {llsx} · QHSX {qhsx} · Chênh lệch {delta >= 0 ? '+' : ''}
-          {delta}
-        </p>
-        <p>Ngân sách khả dụng: ${budget}</p>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-2">
+          <MetricChip kind="llsx" label="LLSX" value={llsx} size="md" />
+          <MetricChip kind="qhsx" label="QHSX" value={qhsx} size="md" />
+          <MetricChip kind="delta" label="Chênh lệch" value={delta} signed size="md" />
+          <MetricChip kind="budget" label="Ngân sách" value={budget} size="md" />
+        </div>
       </CardContent>
     </Card>
   )
