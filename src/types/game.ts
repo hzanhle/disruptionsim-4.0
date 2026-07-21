@@ -8,6 +8,7 @@ export type EndingType =
   | 'technology_breakdown'
   | 'economic_lag'
   | 'sustainable_modernization'
+  | 'esg_utopia'
 
 export interface StatEffects {
   budget: number
@@ -50,12 +51,20 @@ export interface AutomaticCondition {
   message: string
 }
 
+export interface EventSpeaker {
+  id: string
+  name: string
+  role: string
+  dialogue: string
+}
+
 export interface ChoiceMonthEvent {
   id: string
   month: number
   type: 'choice'
   title: string
   context: string
+  speaker?: EventSpeaker
   choices: ChoiceOption[]
   consequences?: ChoiceConsequence[]
 }
@@ -66,6 +75,7 @@ export interface AutomaticMonthEvent {
   type: 'automatic'
   title: string
   context: string
+  speaker?: EventSpeaker
   conditions: AutomaticCondition[]
   neutralMessage: string
 }
@@ -76,6 +86,7 @@ export interface FinaleMonthEvent {
   type: 'finale'
   title: string
   context: string
+  speaker?: EventSpeaker
 }
 
 export type MonthEvent = ChoiceMonthEvent | AutomaticMonthEvent | FinaleMonthEvent

@@ -1,11 +1,13 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { RotateCcw, ScrollText, Trophy, XCircle } from 'lucide-react'
+import { Film, RotateCcw, ScrollText, Sparkles, Trophy, XCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AssetImage } from '@/components/shared/AssetImage'
 import { MetricRow } from '@/components/shared/MetricChip'
 import { calculateDelta } from '@/lib/gameCalculations'
-import { endingImageUrl } from '@/lib/gameAssets'
+import { characterUrl, endingImageUrl } from '@/lib/gameAssets'
+import { CinematicEndingModal } from '@/components/game/CinematicEndingModal'
 import {
   getMotionProps,
   scaleIn,
@@ -21,6 +23,12 @@ const endingMeta: Record<
   EndingType,
   { title: string; status: string; tone: string; icon: typeof Trophy }
 > = {
+  esg_utopia: {
+    title: 'Kỷ nguyên Tự động hóa Toàn phần & ESG Tiên phong',
+    status: 'SECRET ENDING TOÀN DIỆN 🏆',
+    tone: 'border-yellow-400/60 bg-amber-950/40 text-yellow-300 shadow-xl shadow-yellow-500/20',
+    icon: Sparkles,
+  },
   sustainable_modernization: {
     title: 'CNH-HĐH Bền vững',
     status: 'Chiến thắng',
@@ -51,6 +59,7 @@ export function EndingScreen() {
   const resetGame = useGameStore((state) => state.resetGame)
   const reviewJourney = useGameStore((state) => state.reviewJourney)
   const motionProps = getMotionProps(reducedMotion)
+  const [showVideoModal, setShowVideoModal] = useState(false)
 
   if (!ending) return null
 
@@ -170,6 +179,31 @@ export function EndingScreen() {
           </CardContent>
         </Card>
 
+        <Card className="border-cyan-500/30 bg-slate-900/80 backdrop-blur-md">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-4">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-cyan-400">
+                <AssetImage
+                  src={characterUrl('player-director')}
+                  alt="Giám đốc Nguyễn Văn Minh"
+                  fit="cover"
+                  className="h-full w-full"
+                />
+              </div>
+              <div className="space-y-1 min-w-0">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-cyan-400">Lời kết của Giám đốc Nguyễn Văn Minh</h4>
+                <p className="text-sm italic leading-relaxed text-slate-200">
+                  {ending.type === 'sustainable_modernization'
+                    ? '“SmartGarment Việt Nam đã vươn mình thành công nghiệp hóa hiện đại hóa bền vững nhờ sự phối hợp đồng bộ giữa công nghệ AI và kỹ năng công nhân!”'
+                    : ending.type === 'technology_breakdown'
+                    ? '“Chúng ta đã quá vội vã chạy theo công nghệ khi trình độ quản lý và công nhân chưa sẵn sàng, dẫn đến đứt gãy đáng tiếc.”'
+                    : '“Thận trọng quá mức khiến nhà máy tụt hậu so với dòng chảy chuyển đổi số toàn cầu. Lần sau chúng ta sẽ làm tốt hơn!”'}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardContent className="p-5 text-base leading-relaxed text-slate-300">
             Bài học triết học: Quan hệ sản xuất phải phù hợp với trình độ phát triển của lực
@@ -186,7 +220,17 @@ export function EndingScreen() {
           <Button size="lg" variant="secondary" onClick={handleReview}>
             Xem lại hành trình
           </Button>
+          <Button size="lg" variant="outline" onClick={() => setShowVideoModal(true)}>
+            <Film className="h-4 w-4 text-cyan-400" />
+            Xem lại Video AI Kết cục
+          </Button>
         </div>
+
+        <CinematicEndingModal
+          ending={ending}
+          open={showVideoModal}
+          onClose={() => setShowVideoModal(false)}
+        />
       </div>
     </div>
   )

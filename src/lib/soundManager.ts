@@ -2,6 +2,7 @@ import { Howl } from 'howler'
 
 export type SoundId =
   | 'click'
+  | 'hover'
   | 'confirm'
   | 'positive'
   | 'negative'
@@ -9,9 +10,13 @@ export type SoundId =
   | 'settlement'
   | 'victory'
   | 'defeat'
+  | 'fanfare'
+  | 'glitch'
+  | 'alarm'
 
 const soundFiles: Record<SoundId, string> = {
   click: '/sounds/click.wav',
+  hover: '/sounds/hover.wav',
   confirm: '/sounds/confirm.wav',
   positive: '/sounds/positive.wav',
   negative: '/sounds/negative.wav',
@@ -19,6 +24,9 @@ const soundFiles: Record<SoundId, string> = {
   settlement: '/sounds/settlement.wav',
   victory: '/sounds/victory.wav',
   defeat: '/sounds/defeat.wav',
+  fanfare: '/sounds/fanfare.wav',
+  glitch: '/sounds/glitch.wav',
+  alarm: '/sounds/alarm.wav',
 }
 
 let initialized = false

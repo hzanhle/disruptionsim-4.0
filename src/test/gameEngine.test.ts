@@ -11,6 +11,7 @@ import {
   evaluateImmediateEnding,
   resolveMonth,
 } from '@/lib/gameEngine'
+import type { MonthHistoryEntry } from '@/types/game'
 import {
   createDefaultPersistedState,
   hasCompletedSave,
@@ -282,5 +283,40 @@ describe('turn safety', () => {
 
     expect(resolution.settlement).not.toBeNull()
     expect(resolution.settlement?.monthlyNet).toBeTypeOf('number')
+  })
+
+  it('triggers secret ending esg_utopia when conditions are met', () => {
+    let snapshot = createInitialSnapshot()
+    const history: MonthHistoryEntry[] = []
+
+    const choices: (string | null)[] = [
+      'month-1-a',
+      'month-2-a',
+      'month-3-b',
+      null,
+      'month-5-a',
+      null,
+      'month-7-a',
+      'month-8-a',
+      'month-9-a',
+      null,
+    ]
+
+    for (let m = 1; m <= 10; m++) {
+      const choiceId = choices[m - 1]
+      const resolution = resolveMonth({
+        month: m,
+        snapshot,
+        choiceId,
+        history,
+      })
+      const entry = createHistoryEntry(resolution)
+      history.push(entry)
+      snapshot = resolution.after
+    }
+
+    const finalEnding = evaluateFinalEnding(snapshot, history)
+    console.log('DEBUG SNAPSHOT:', { snapshot, neverHadWarning: !history.some((h) => h.after.delta >= 2), historyDeltas: history.map(h => ({ m: h.month, delta: h.after.delta })) })
+    expect(finalEnding.type).toBe('esg_utopia')
   })
 })

@@ -1,3 +1,5 @@
+import type { EndingType } from '@/types/game'
+
 /**
  * Game art registry — loads files from /assets via Vite.
  * Paths are relative to the assets/ folder, e.g. "events/month-01.png".
@@ -46,6 +48,19 @@ export const concepts = {
   endingsOverview: () => assetUrl('concepts/endings-overview.png'),
 }
 
+export function characterUrl(characterId: string): string | undefined {
+  return assetUrl(`characters/${characterId}.png`)
+}
+
+export const characters = {
+  director: () => characterUrl('player-director'),
+  official: () => characterUrl('government-official'),
+  inspector: () => characterUrl('eu-inspector'),
+  salesman: () => characterUrl('robot-salesman'),
+  fie: () => characterUrl('fie-executive'),
+  buyer: () => characterUrl('international-buyer'),
+}
+
 export function eventSceneUrl(month: number): string | undefined {
   const padded = String(month).padStart(2, '0')
   return assetUrl(`events/month-${padded}.png`)
@@ -61,13 +76,14 @@ export function choiceImageUrl(choiceId: string): string | undefined {
 }
 
 export function endingImageUrl(
-  type: 'sustainable_modernization' | 'technology_breakdown' | 'economic_lag',
+  type: EndingType,
 ): string | undefined {
-  const map = {
+  const map: Record<EndingType, string> = {
     sustainable_modernization: 'endings/sustainable-modernization.png',
     technology_breakdown: 'endings/technology-breakdown.png',
     economic_lag: 'endings/economic-lag.png',
-  } as const
+    esg_utopia: 'endings/sustainable-modernization.png',
+  }
   return assetUrl(map[type])
 }
 

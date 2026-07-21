@@ -37,10 +37,14 @@ const ECONOMIC_LAG_BASE_MESSAGE =
 const VICTORY_MESSAGE =
   'Bạn đã đưa SmartGarment Việt Nam vượt qua đứt gãy công nghệ thành công. Bằng tư duy biện chứng, bạn luôn giữ sự cân bằng giữa phát triển công cụ số (LLSX) và nâng cao trình độ con người, quy trình quản lý (QHSX). Xưởng may của bạn hiện đã dịch chuyển sang mô hình Kinh tế tri thức, đóng góp vào sự nghiệp hiện đại hóa đất nước.'
 
+const UTOPIA_MESSAGE =
+  'KẾT CỤC ẨN TOÀN DIỆN (SECRET ESG UTOPIA): Bạn đã đạt tới đỉnh cao tuyệt đối của tiến trình CNH-HĐH! SmartGarment Việt Nam chính thức bước vào kỷ nguyên "Nhà máy Không ánh đèn" (Dark Factory) vận hành 100% bằng năng lượng xanh ESG & AI. Công nhân Việt Nam không bị máy móc thay thế, mà chuyển đổi thành công 100% sang vai trò Chuyên gia Quản trị AI & Làm chủ Quan hệ sản xuất mới tiên tiến nhất thế giới. Mô hình của bạn trở thành biểu tượng quốc gia vinh danh tại Diễn đàn Kinh tế Thế giới (WEF).'
+
 export interface ResolveMonthInput {
   month: number
   snapshot: GameSnapshot
   choiceId?: string | null
+  history?: MonthHistoryEntry[]
 }
 
 export function evaluateImmediateEnding(
@@ -67,8 +71,33 @@ export function evaluateImmediateEnding(
   return null
 }
 
-export function evaluateFinalEnding(snapshot: GameSnapshot): EndingResult {
+export function evaluateFinalEnding(
+  snapshot: GameSnapshot,
+  history: MonthHistoryEntry[] = [],
+): EndingResult {
   const delta = calculateDelta(snapshot.llsx, snapshot.qhsx)
+
+  // Secret Ending: Absolute ESG Utopia (Extreme Difficulty Conditions)
+  // 1. Max Level LLSX = 5 & QHSX = 5
+  // 2. High Financial Surplus: Budget >= 150 (in-game scale)
+  // 3. Perfect Balance: Delta = 0 in Month 10
+  // 4. Zero Breakdown Warnings: History never had delta >= 2 in any month
+  const neverHadWarning = !history.some((h) => h.after.delta >= 2)
+
+  if (
+    snapshot.budget >= 150 &&
+    snapshot.llsx >= 5 &&
+    snapshot.qhsx >= 5 &&
+    Math.abs(delta) <= 1 &&
+    neverHadWarning
+  ) {
+    return {
+      type: 'esg_utopia',
+      message: UTOPIA_MESSAGE,
+      reason:
+        'Thành tựu tối thượng: LLSX = 5, QHSX = 5, Chênh lệch = 0, Thặng dư Ngân sách ≥ $150 tỷ và chưa từng xảy ra bất kỳ cảnh báo đứt gãy nào.',
+    }
+  }
 
   if (
     snapshot.budget > 0 &&
@@ -388,7 +417,7 @@ export function resolveMonth(input: ResolveMonthInput): MonthResolution {
 
   let finalEnding: EndingResult | null = null
   if (isFinaleEvent(event)) {
-    finalEnding = evaluateFinalEnding(current)
+    finalEnding = evaluateFinalEnding(current, input.history)
   }
 
   const ending = pickEnding(
@@ -443,8 +472,17 @@ export function createInitialSnapshot(): GameSnapshot {
 
 export function endingFromResolution(
   resolution: MonthResolution,
+  history: MonthHistoryEntry[] = [],
 ): EndingResult | null {
   if (!resolution.endingTriggered) return null
+
+  if (resolution.endingTriggered === 'esg_utopia') {
+    return {
+      type: 'esg_utopia',
+      message: UTOPIA_MESSAGE,
+      reason: resolution.endingReason,
+    }
+  }
 
   if (resolution.endingTriggered === 'technology_breakdown') {
     return {
@@ -473,7 +511,7 @@ export function endingFromResolution(
 
   // Surviving month-10 non-victory states use the adaptive economic-lag fallback.
   if (resolution.month === 10) {
-    return evaluateFinalEnding(resolution.after)
+    return evaluateFinalEnding(resolution.after, history)
   }
 
   return {

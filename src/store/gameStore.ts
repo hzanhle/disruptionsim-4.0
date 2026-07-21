@@ -177,6 +177,7 @@ export const useGameStore = create<GameStore>()(
           month: state.currentMonth,
           snapshot: snapshotFromState(state),
           choiceId: state.pendingChoiceId,
+          history: state.history,
         })
 
         const historyEntry = createHistoryEntry(resolution)
@@ -189,7 +190,7 @@ export const useGameStore = create<GameStore>()(
           currentResolution: resolution,
           pendingChoiceId: null,
           choiceLocked: true,
-          ending: endingFromResolution(resolution),
+          ending: endingFromResolution(resolution, current.history),
           gameStatus: 'report',
           isResolving: false,
         }))
@@ -213,6 +214,7 @@ export const useGameStore = create<GameStore>()(
         const resolution = resolveMonth({
           month: state.currentMonth,
           snapshot: snapshotFromState(state),
+          history: state.history,
         })
 
         const historyEntry = createHistoryEntry(resolution)
@@ -225,7 +227,7 @@ export const useGameStore = create<GameStore>()(
           currentResolution: resolution,
           pendingChoiceId: null,
           choiceLocked: true,
-          ending: endingFromResolution(resolution),
+          ending: endingFromResolution(resolution, current.history),
           gameStatus: 'report',
           isResolving: false,
         }))

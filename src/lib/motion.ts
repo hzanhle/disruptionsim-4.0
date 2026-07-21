@@ -15,6 +15,12 @@ export const softTransition: Transition = {
   ease: easeOutSoft,
 }
 
+export const springPhysics: Transition = {
+  type: 'spring',
+  stiffness: 320,
+  damping: 24,
+}
+
 export const microTransition: Transition = {
   duration: durations.micro,
   ease: easeOutSoft,
@@ -52,6 +58,16 @@ export const scaleIn: Variants = {
     opacity: 1,
     scale: 1,
     transition: softTransition,
+  },
+}
+
+/** Tactile Spring scale-in */
+export const scaleInSpring: Variants = {
+  initial: { opacity: 0, scale: 0.94 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    transition: springPhysics,
   },
 }
 

@@ -13,6 +13,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Khởi động làn sóng 4.0',
     context:
       'Nhà nước phát động chiến lược Chuyển đổi số doanh nghiệp sản xuất.',
+    speaker: {
+      id: 'government-official',
+      name: 'Bà Trần Thị Thanh',
+      role: 'Chuyên viên Bộ Công Thương',
+      dialogue:
+        'Chuyển đổi số là chìa khóa để ngành may xuất khẩu Việt Nam bứt phá trong kỷ nguyên Công nghiệp 4.0!',
+    },
     choices: [
       {
         id: 'month-1-a',
@@ -40,6 +47,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Áp lực từ Hội nhập Quốc tế (EVFTA)',
     context:
       'Phái đoàn EU đến kiểm tra nhà máy để cấp chứng nhận xuất khẩu với thuế suất 0%.',
+    speaker: {
+      id: 'eu-inspector',
+      name: 'Ông Henrik Weber',
+      role: 'Trưởng đoàn kiểm tra EVFTA (Liên minh Châu Âu)',
+      dialogue:
+        'Chúng tôi đánh giá cao quy mô nhà máy, nhưng tiêu chuẩn an toàn và phúc lợi lao động mới là yếu tố quyết định thuế suất 0%.',
+    },
     choices: [
       {
         id: 'month-2-a',
@@ -80,6 +94,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Cám dỗ "Robot giá rẻ"',
     context:
       'Một đối tác chào bán dây chuyền tự động hóa cũ của nước ngoài với giá rẻ nhưng không có hướng dẫn sử dụng tiếng Việt.',
+    speaker: {
+      id: 'robot-salesman',
+      name: 'Mr. Tanaka',
+      role: 'Đại diện Nhà cung cấp Thiết bị Tự động hóa',
+      dialogue:
+        'Dàn robot may tự động này có mức giá rất hấp dẫn! Năng suất sản xuất sẽ tăng gấp đôi ngay lập tức.',
+    },
     choices: [
       {
         id: 'month-3-a',
@@ -109,6 +130,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Khủng hoảng "Mất kỹ năng"',
     context:
       'Sự phát triển quá nhanh của máy móc khiến kỹ năng hiện tại của người lao động có nguy cơ trở nên lỗi thời.',
+    speaker: {
+      id: 'player-director',
+      name: 'Giám đốc Nguyễn Văn Minh',
+      role: 'Giám đốc Điều hành SmartGarment',
+      dialogue:
+        'Máy móc hiện đại đã về xưởng, nhưng nếu đội ngũ công nhân chưa được làm chủ công nghệ thì nguy cơ đứt gãy vận hành rất cao!',
+    },
     conditions: [
       {
         id: 'month-4-delta-2',
@@ -135,6 +163,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Gói hỗ trợ CNH rút ngắn của Chính phủ',
     context:
       'Bộ Công Thương tung gói hỗ trợ doanh nghiệp thực hiện công nghiệp hóa, hiện đại hóa bền vững.',
+    speaker: {
+      id: 'government-official',
+      name: 'Ông Lê Hoàng Nam',
+      role: 'Chuyên gia CNH-HĐH Bộ Công Thương',
+      dialogue:
+        'Chương trình hỗ trợ của Nhà nước sẽ giúp doanh nghiệp nâng cấp hệ thống ERP và đào tạo kỹ năng số cho công nhân.',
+    },
     choices: [
       {
         id: 'month-5-a',
@@ -165,6 +200,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Cú sốc Đứt gãy Chuỗi cung ứng',
     context:
       'Đối tác cung ứng nguyên liệu nước ngoài chuyển sang nền tảng quản lý bằng Blockchain và yêu cầu nhà máy kết nối API dữ liệu để tiếp tục nhận đơn.',
+    speaker: {
+      id: 'international-buyer',
+      name: 'Bà Sarah Jenkins',
+      role: 'Đại diện Chuỗi cung ứng Dệt may Toàn cầu',
+      dialogue:
+        'Hệ thống mới của chúng tôi yêu cầu toàn bộ dữ liệu nguyên liệu và tiến độ phải được đồng bộ qua API Blockchain.',
+    },
     conditions: [
       {
         id: 'month-6-connected',
@@ -190,6 +232,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Làn sóng "Chảy máu chất xám"',
     context:
       'Các tập đoàn FIE mở nhà máy thông minh bên cạnh và tuyển dụng nhân sự chất lượng cao với mức lương hấp dẫn.',
+    speaker: {
+      id: 'fie-executive',
+      name: 'Ms. Clara Vance',
+      role: 'Giám đốc Nhân sự Tập đoàn FIE',
+      dialogue:
+        'Chúng tôi đưa ra mức lương và chế độ đãi ngộ vượt trội cho các kỹ sư vận hành máy móc hiện đại tại khu công nghiệp mới.',
+    },
     choices: [
       {
         id: 'month-7-a',
@@ -219,6 +268,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Xu hướng "Xanh hóa" sản xuất (ESG)',
     context:
       'Khách hàng quốc tế yêu cầu nhà máy minh bạch quy trình và giảm phát thải.',
+    speaker: {
+      id: 'international-buyer',
+      name: 'Bà Sarah Jenkins',
+      role: 'Giám đốc Thu mua Nhãn hàng Thời trang Quốc tế',
+      dialogue:
+        'Thị trường Âu Mỹ ưu tiên hợp tác với các nhà máy đáp ứng chứng chỉ sản xuất xanh ESG và tối ưu điện năng.',
+    },
     choices: [
       {
         id: 'month-8-a',
@@ -258,6 +314,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Tăng tốc về đích',
     context:
       'SmartGarment Việt Nam có cơ hội nhận một đơn hàng khổng lồ cho mùa lễ hội cuối năm.',
+    speaker: {
+      id: 'player-director',
+      name: 'Giám đốc Nguyễn Văn Minh',
+      role: 'Giám đốc Điều hành SmartGarment',
+      dialogue:
+        'Đơn hàng mùa lễ hội là cơ hội tăng doanh thu lớn, nhưng chúng ta phải lựa chọn giữa ép công suất máy hay chuẩn hóa an toàn vận hành.',
+    },
     choices: [
       {
         id: 'month-9-a',
@@ -286,6 +349,13 @@ export const monthEvents: MonthEvent[] = [
     title: 'Tổng kết tiến trình CNH-HĐH',
     context:
       'SmartGarment Việt Nam bước vào tháng sản xuất cuối cùng. Hệ thống tiến hành tổng kết toàn bộ quá trình công nghiệp hóa, hiện đại hóa.',
+    speaker: {
+      id: 'player-director',
+      name: 'Giám đốc Nguyễn Văn Minh',
+      role: 'Giám đốc Điều hành SmartGarment',
+      dialogue:
+        'Chặng đường 10 tháng đã hoàn tất. Hãy cùng xem kết quả của sự kết hợp giữa công nghệ, quản trị và con người!',
+    },
   },
 ]
 

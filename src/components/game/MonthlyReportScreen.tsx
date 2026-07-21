@@ -5,6 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { TOTAL_MONTHS } from '@/lib/constants'
 import { formatSigned } from '@/lib/utils'
 import { MetricRow, signedTone } from '@/components/shared/MetricChip'
+import { AssetImage } from '@/components/shared/AssetImage'
+import { characterUrl } from '@/lib/gameAssets'
 import { playSound } from '@/lib/soundManager'
 import { useGameStore } from '@/store/gameStore'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
@@ -15,6 +17,9 @@ import {
   staggerItem,
 } from '@/lib/motion'
 
+import { useState } from 'react'
+import { CinematicEndingModal } from '@/components/game/CinematicEndingModal'
+
 export function MonthlyReportScreen() {
   const reducedMotion = useReducedMotion()
   const resolution = useGameStore((state) => state.currentResolution)
@@ -22,6 +27,7 @@ export function MonthlyReportScreen() {
   const advanceMonth = useGameStore((state) => state.advanceMonth)
   const viewEndingFromReport = useGameStore((state) => state.viewEndingFromReport)
   const motionProps = getMotionProps(reducedMotion)
+  const [showVideoModal, setShowVideoModal] = useState(Boolean(ending))
 
   if (!resolution) return null
 
@@ -206,10 +212,25 @@ export function MonthlyReportScreen() {
         ) : null}
 
         <Card>
-          <CardContent className="p-5 text-base leading-relaxed text-slate-300">
-            {ending
-              ? 'Tháng này kích hoạt kết cục. Hãy xem tổng kết để hiểu bài học từ hành trình của bạn.'
-              : 'Mỗi quyết định đều phản ánh mối quan hệ biện chứng giữa LLSX và QHSX. Tiếp tục theo dõi chênh lệch để tránh đứt gãy hoặc tụt hậu.'}
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3.5">
+              <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-cyan-400/50">
+                <AssetImage
+                  src={characterUrl('player-director')}
+                  alt="Giám đốc Nguyễn Văn Minh"
+                  fit="cover"
+                  className="h-full w-full"
+                />
+              </div>
+              <div className="space-y-0.5 min-w-0">
+                <h4 className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">Nhật ký Giám đốc Nguyễn Văn Minh</h4>
+                <p className="text-sm text-slate-200 italic leading-relaxed">
+                  {ending
+                    ? 'Tháng này đã định đoạt kết cục của nhà máy SmartGarment. Hãy cùng mở báo cáo tổng kết toàn bộ hành trình.'
+                    : 'Mỗi bước đi tài chính và công nghệ đều cần sự đồng bộ của lực lượng lao động. Hãy giữ vững thế cân bằng LLSX - QHSX.'}
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
@@ -227,6 +248,12 @@ export function MonthlyReportScreen() {
             <ArrowRight className="h-4 w-4" />
           </Button>
         </motion.div>
+
+        <CinematicEndingModal
+          ending={ending}
+          open={showVideoModal}
+          onClose={() => setShowVideoModal(false)}
+        />
       </div>
     </div>
   )

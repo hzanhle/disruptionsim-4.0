@@ -63,7 +63,7 @@ export function applyEffects(
 ): GameSnapshot {
   return {
     budget: snapshot.budget + effects.budget,
-    llsx: snapshot.llsx + effects.llsx,
-    qhsx: snapshot.qhsx + effects.qhsx,
+    llsx: Math.min(5, Math.max(1, snapshot.llsx + effects.llsx)),
+    qhsx: Math.min(5, Math.max(1, snapshot.qhsx + effects.qhsx)),
   }
 }

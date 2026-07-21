@@ -2,7 +2,7 @@ import { ArrowLeft, BookOpenCheck, Scale, Wallet, Wrench, Trophy } from 'lucide-
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AssetImage } from '@/components/shared/AssetImage'
-import { concepts } from '@/lib/gameAssets'
+import { concepts, characterUrl } from '@/lib/gameAssets'
 import { useGameStore } from '@/store/gameStore'
 
 const glossary = [
@@ -64,6 +64,23 @@ export function TutorialScreen() {
             <ArrowLeft className="h-4 w-4" />
             Quay lại
           </Button>
+        </div>
+
+        <div className="flex items-center gap-4 rounded-2xl border border-cyan-500/30 bg-slate-900/80 p-4 backdrop-blur-md">
+          <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-cyan-400">
+            <AssetImage
+              src={characterUrl('player-director')}
+              alt="Giám đốc Nguyễn Văn Minh"
+              fit="cover"
+              className="h-full w-full"
+            />
+          </div>
+          <div className="space-y-1">
+            <h4 className="text-sm font-bold text-cyan-300">Lời khuyên từ Giám đốc Nguyễn Văn Minh:</h4>
+            <p className="text-xs sm:text-sm italic leading-relaxed text-slate-200">
+              &ldquo;Bí quyết chiến thắng: Đừng nâng cấp máy móc quá nhanh nếu chưa đầu tư đào tạo kỹ năng số và nâng cao phúc lợi cho công nhân. Lực lượng sản xuất và Quan hệ sản xuất phải phát triển hài hòa!&rdquo;
+            </p>
+          </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">

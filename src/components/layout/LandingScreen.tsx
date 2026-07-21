@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog'
 import { AssetImage } from '@/components/shared/AssetImage'
 import { SoundToggle } from '@/components/shared/SoundToggle'
-import { branding } from '@/lib/gameAssets'
+import { branding, characterUrl } from '@/lib/gameAssets'
 import { unlockAudio, playSound } from '@/lib/soundManager'
 import { durations, easeOutSoft } from '@/lib/motion'
 import { getSaveAvailability, useGameStore } from '@/store/gameStore'
@@ -156,6 +156,48 @@ export function LandingScreen() {
                 inset
                 className="aspect-video w-full md:aspect-auto md:h-full md:min-h-36"
               />
+            </div>
+          </motion.section>
+
+          <motion.section
+            initial={reducedMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: durations.screen,
+              delay: reducedMotion ? 0 : durations.stagger * 1.5,
+              ease: easeOutSoft,
+            }}
+            className="space-y-3"
+          >
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-400">
+                Nhân vật & Ban Cố vấn Mô phỏng
+              </p>
+              <span className="text-xs text-slate-400 font-mono">4 Nhân vật chính</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+              {[
+                { id: 'player-director', name: 'Nguyễn Văn Minh', role: 'Giám đốc SmartGarment' },
+                { id: 'government-official', name: 'Trần Thị Thanh', role: 'Bộ Công Thương' },
+                { id: 'eu-inspector', name: 'Henrik Weber', role: 'Thanh tra EVFTA EU' },
+                { id: 'international-buyer', name: 'Sarah Jenkins', role: 'Chuỗi Cung ứng ESG' },
+              ].map((char) => (
+                <div
+                  key={char.id}
+                  className="group flex flex-col items-center rounded-xl border border-slate-800 bg-slate-900/60 p-2.5 text-center backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/40 hover:bg-slate-900/90"
+                >
+                  <div className="relative mb-2 h-14 w-14 overflow-hidden rounded-full ring-2 ring-cyan-500/30 transition-transform group-hover:scale-105">
+                    <AssetImage
+                      src={characterUrl(char.id)}
+                      alt={char.name}
+                      fit="cover"
+                      className="h-full w-full"
+                    />
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-100 group-hover:text-cyan-300">{char.name}</h4>
+                  <p className="mt-0.5 text-[10px] text-slate-400">{char.role}</p>
+                </div>
+              ))}
             </div>
           </motion.section>
 

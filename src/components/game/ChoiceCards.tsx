@@ -10,6 +10,8 @@ import { cn, formatBudget, formatSigned } from '@/lib/utils'
 import type { ChoiceOption } from '@/types/game'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
 
+import { playSound } from '@/lib/soundManager'
+
 interface ChoiceCardsProps {
   choices: ChoiceOption[]
   selectedId: string | null
@@ -53,8 +55,9 @@ export function ChoiceCards({
             animate={{
               opacity: 1,
               y: 0,
-              scale: selected && !reducedMotion ? 1.01 : 1,
+              scale: selected && !reducedMotion ? 1.015 : 1,
             }}
+            whileHover={reducedMotion ? undefined : { y: -3 }}
             transition={{
               ...microTransition,
               delay: reducedMotion ? 0 : index * durations.stagger,
@@ -63,6 +66,9 @@ export function ChoiceCards({
             <button
               type="button"
               disabled={locked}
+              onMouseEnter={() => {
+                if (!locked) playSound('hover')
+              }}
               onClick={() => onSelect(choice.id)}
               aria-label={`${choice.title}. Ngân sách ${formatSigned(choice.effects.budget, '$')}, LLSX ${formatSigned(choice.effects.llsx)}, QHSX ${formatSigned(choice.effects.qhsx)}. Sau chọn còn ${formatBudget(nextBudget)}.`}
               aria-pressed={selected}
